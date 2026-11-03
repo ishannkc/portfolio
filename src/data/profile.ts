@@ -1,14 +1,16 @@
 import type { AboutContent, HeroContent } from "./types";
 
 export const hero: HeroContent = {
-  greeting: "Namaste from Dhulikhel, Nepal!",
-  heading: "Hi, I'm Ishan!",
-  role: "Final Year CS Student @ Kathmandu University",
+  heading: {
+    before: "hi, ",
+    highlight: "Ishan",
+    after: " here.",
+  },
   pitch:
-    "Crafting intuitive web tools and studying how humans interact with machines, one cozy line of code at a time.",
+    "Developer-in-training by day, researcher of how humans poke and talk at phones by night. Fueled by side projects, AI experiments, and the occasional mountain.",
   cta: {
     label: "Say Hi!",
-    href: "#projects",
+    href: "#contact",
   },
   mascotBadge: "★ KU",
   mascotCaption: "Always building! 📜",

@@ -25,9 +25,11 @@ export interface Stat {
 }
 
 export interface HeroContent {
-  greeting: string;
-  heading: string;
-  role: string;
+  heading: {
+    before: string;
+    highlight: string;
+    after: string;
+  };
   pitch: string;
   cta: {
     label: string;

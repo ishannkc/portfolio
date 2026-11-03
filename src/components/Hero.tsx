@@ -1,5 +1,6 @@
 import { hero } from "@/data/profile";
 import { Button } from "./Button";
+import { MailIcon } from "./icons";
 import { WaxSeal } from "./WaxSeal";
 import { MascotIllustration } from "./illustrations/MascotIllustration";
 import {
@@ -16,30 +17,16 @@ export function Hero() {
       <Astrolabe className="pointer-events-none absolute bottom-6 left-12 hidden select-none opacity-35 md:block" />
 
       <div className="relative mx-auto max-w-[1100px] px-margin">
-        <div className="flex flex-col-reverse items-center gap-space-xl lg:flex-row lg:justify-between">
+        <div className="flex flex-col-reverse items-center gap-space-xl lg:flex-row-reverse lg:justify-between lg:gap-28 xl:gap-32">
           <div className="flex flex-1 flex-col items-center text-center lg:items-start lg:text-left">
-            <div className="ink-shadow-sm mb-space-md inline-flex max-w-full items-center gap-2 whitespace-nowrap rounded-full border-2 border-[#3B2A20] bg-[#FAF0DC] px-space-md py-1.5">
-              <span aria-hidden="true" className="text-xs text-[#B8923A]">
-                ✒️
+            <h1 className="mb-space-md font-display-hero text-5xl font-bold leading-none tracking-tight text-[#3B2A20] md:text-6xl">
+              {hero.heading.before}
+              <span className="font-extrabold text-[#800020]">
+                {hero.heading.highlight}
               </span>
-              <span className="font-label-md text-sm italic tracking-wide text-[#3B2A20]">
-                {hero.greeting}
-              </span>
-              <span
-                aria-hidden="true"
-                className="inline-block h-2 w-2 rounded-full bg-[#800020]"
-              />
-            </div>
-
-            <h1 className="mb-3 font-display-hero text-5xl font-bold leading-none tracking-tight text-[#3B2A20] md:text-6xl">
-              {hero.heading}
+              {hero.heading.after}
+              <span aria-hidden="true" className="hero-cursor" />
             </h1>
-
-            <div className="ink-shadow-sm mb-space-md rounded-xl border-2 border-l-4 border-[#3B2A20] border-l-[#800020] bg-[#FAF0DC] px-space-md py-2">
-              <p className="font-label-lg text-[15px] font-medium tracking-wide text-[#3B2A20] sm:text-base">
-                {hero.role}
-              </p>
-            </div>
 
             <p className="mb-space-lg max-w-xl font-body-lg text-xl leading-relaxed text-[#3B2A20]">
               {hero.pitch}
@@ -48,9 +35,7 @@ export function Hero() {
             <div className="flex flex-wrap items-center justify-center gap-space-md lg:justify-start">
               <Button href={hero.cta.href} size="md">
                 <span>{hero.cta.label}</span>
-                <span aria-hidden="true" className="font-bold">
-                  ↓
-                </span>
+                <MailIcon className="h-[1.15em] w-[1.15em]" />
               </Button>
             </div>
           </div>

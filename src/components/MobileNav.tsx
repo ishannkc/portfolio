@@ -34,9 +34,9 @@ export function MobileNav({ navItems }: MobileNavProps) {
         type="button"
       >
         {open ? (
-          <CloseIcon className="h-6 w-6" />
+          <CloseIcon className="h-7 w-7" />
         ) : (
-          <MenuIcon className="h-6 w-6" />
+          <MenuIcon className="h-7 w-7" />
         )}
       </button>
 
@@ -50,8 +50,8 @@ export function MobileNav({ navItems }: MobileNavProps) {
             <a
               className={
                 item.href === "#"
-                  ? "font-headline-md text-base font-medium text-[#800020] underline decoration-[#800020]/60 decoration-1 underline-offset-4"
-                  : "font-headline-md text-base font-medium text-[#3B2A20] transition-colors hover:text-[#800020]"
+                  ? "font-headline-md text-lg font-extrabold text-[#800020] underline decoration-[#800020]/60 decoration-1 underline-offset-4"
+                  : "font-headline-md text-lg font-extrabold text-[#3B2A20] transition-colors hover:text-[#800020]"
               }
               href={item.href}
               key={item.label}
