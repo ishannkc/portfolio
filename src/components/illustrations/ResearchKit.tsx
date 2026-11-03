@@ -8,8 +8,10 @@ export function ResearchKitIllustration({ className }: ResearchKitProps) {
       aria-labelledby="research-kit-title"
       className={className}
       fill="none"
+      height={130}
       role="img"
       viewBox="0 0 140 130"
+      width={140}
       xmlns="http://www.w3.org/2000/svg"
     >
       <title id="research-kit-title">

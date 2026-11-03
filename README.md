@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="public/images/temple.png" alt="Temple sigil logo" width="72" />
 
-## Getting Started
+  <h1>ishan kc - portfolio</h1>
 
-First, run the development server:
+  <p>
+    A single-page portfolio built with
+    <strong>Next.js 16</strong>, <strong>React 19</strong>,
+    <strong>TypeScript</strong>, and <strong>Tailwind CSS v4</strong>.
+  </p>
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Ishan Kc portfolio preview](docs/preview.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ set-up
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Install the dependencies
 
-## Learn More
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Start the development server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+3. Lint the project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run lint
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 build and run for production
+
+1. Generate a production build
+
+   ```bash
+   npm run build
+   ```
+
+2. Start the production server
+
+   ```bash
+   npm start
+   ```
+
+   Set `NEXT_PUBLIC_SITE_URL` before building so canonical metadata,
+   `robots.txt`, and `sitemap.xml` use the public domain:
+
+   ```bash
+   NEXT_PUBLIC_SITE_URL=https://your-domain.com npm run build
+   ```
+
+   On Windows PowerShell:
+
+   ```powershell
+   $env:NEXT_PUBLIC_SITE_URL="https://your-domain.com"; npm run build
+   ```
+
+   On Vercel, `VERCEL_PROJECT_PRODUCTION_URL` and `VERCEL_URL` are used as
+   fallbacks when `NEXT_PUBLIC_SITE_URL` is not set.
+
+## 🎨 color codes
+
+| Color | Hex |
+| --- | --- |
+| Parchment ![#F5EAD4](docs/swatches/parchment.png) | `#F5EAD4` |
+| Deep Parchment ![#EFE1C3](docs/swatches/deep-parchment.png) | `#EFE1C3` |
+| Folio Card ![#FAF0DC](docs/swatches/folio-card.png) | `#FAF0DC` |
+| Iron Gall Ink ![#3B2A20](docs/swatches/iron-gall-ink.png) | `#3B2A20` |
+| Soft Ink ![#584141](docs/swatches/soft-ink.png) | `#584141` |
+| Burgundy ![#800020](docs/swatches/burgundy.png) | `#800020` |
+| Antique Gold ![#B8923A](docs/swatches/antique-gold.png) | `#B8923A` |
+| Candlelight Cream ![#FFF4E0](docs/swatches/candlelight-cream.png) | `#FFF4E0` |
+

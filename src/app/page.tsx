@@ -67,8 +67,9 @@ export default function Home() {
       </a>
       <Navbar />
       <main
-        className="min-h-[calc(100vh-20rem)] w-full bg-[#F5EAD4]"
+        className="min-h-[calc(100vh-20rem)] w-full bg-[#F5EAD4] focus:outline-none"
         id="main-content"
+        tabIndex={-1}
       >
         <Hero />
         <About />
