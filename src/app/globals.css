@@ -1,26 +1,146 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
+@config "../../tailwind.config.mts";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --ink: #3b2a20;
+    --ink-soft: #584141;
+    --parchment: #f5ead4;
+    --parchment-deep: #efe1c3;
+    --card: #faf0dc;
+    --burgundy: #800020;
+    --gold: #b8923a;
+    --focus: #800020;
+    --nav-height: 4.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--parchment);
+    color: var(--ink);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--parchment);
+    color: var(--ink);
+    overscroll-behavior: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Keep anchored section headings clear of the sticky header. */
+  section[id],
+  [id="contact"] {
+    scroll-margin-top: calc(var(--nav-height) + 0.75rem);
+  }
+
+  ::selection {
+    background-color: #800020;
+    color: #fff4e0;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  /* The source design hides the browser scrollbar. */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Renaissance parchment and ink mechanics, ported from code.html. */
+.ink-shadow-sm {
+  box-shadow: 2px 2px 0px #3b2a20;
 }
+
+.ink-shadow {
+  box-shadow: 3px 3px 0px #3b2a20;
+}
+
+.ink-shadow-md {
+  box-shadow: 4px 4px 0px #3b2a20;
+}
+
+.ink-btn-press {
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.ink-btn-press:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #3b2a20;
+}
+
+.ink-btn-press:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #3b2a20;
+}
+
+.wax-seal {
+  background: radial-gradient(
+    circle at 35% 35%,
+    #9e0e29 0%,
+    #800020 60%,
+    #4e0013 100%
+  );
+  box-shadow:
+    2px 2px 0px #3b2a20,
+    inset 0 1px 2px rgba(255, 244, 224, 0.3),
+    inset 0 -2px 3px rgba(59, 42, 32, 0.45);
+}
+
+.wax-seal-border {
+  border: 2px solid #560012;
+  position: relative;
+}
+
+.drop-cap-illuminated {
+  float: left;
+  font-family: var(--font-cormorant), serif;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  padding: 8px 12px 6px 10px;
+  margin: 4px 14px 4px 0;
+  background: #800020;
+  color: #f5ead4;
+  border: 2px solid #3b2a20;
+  box-shadow: 2px 2px 0 #b8923a;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ink-btn-press:hover,
+  .ink-btn-press:active {
+    transform: none;
+  }
+}
+
