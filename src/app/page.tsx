@@ -39,6 +39,7 @@ const personJsonLd = {
     site.socials.github,
     site.socials.linkedin,
     site.socials.twitter,
+    site.socials.instagram,
   ],
   knowsAbout: [
     "Human-Computer Interaction",

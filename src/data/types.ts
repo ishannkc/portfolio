@@ -3,6 +3,7 @@ export type IconName =
   | "github"
   | "linkedin"
   | "twitter"
+  | "instagram"
   | "external"
   | "temple"
   | "lab";

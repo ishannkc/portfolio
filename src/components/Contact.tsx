@@ -2,7 +2,7 @@ import { contact } from "@/data/contact";
 import { site } from "@/data/site";
 import { Button } from "./Button";
 import { Card } from "./Card";
-import { CopyEmailButton } from "./CopyEmailButton";
+import { MailIcon } from "./icons";
 import { SectionHeading } from "./SectionHeading";
 import { WaxSeal } from "./WaxSeal";
 import {
@@ -59,16 +59,11 @@ export function Contact() {
               <Button
                 className="w-full sm:w-auto"
                 href={`mailto:${site.email}`}
-                size="lg"
+                size="md"
               >
-                <span>{site.email}</span>
-                <span aria-hidden="true">✉️</span>
+                <span>Mail me</span>
+                <MailIcon className="h-[1.15em] w-[1.15em]" />
               </Button>
-              <CopyEmailButton
-                copiedLabel={contact.copiedLabel}
-                email={site.email}
-                label={contact.copyLabel}
-              />
             </div>
 
             <div className="mt-space-lg border-t-2 border-[#3B2A20]/20 pt-space-md">

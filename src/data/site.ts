@@ -1,11 +1,15 @@
 import type { NavItem, SocialLink } from "./types";
 
+const email = "ishankc777@gmail.com";
+const github = "https://github.com/ishannkc";
+const linkedin = "https://www.linkedin.com/in/ishan-kc-bb3380285/";
+
 export const site = {
   name: "Ishan Kc",
   title: "Ishan Kc — Renaissance Scholar & CS Student Portfolio",
   description:
     "Ishan Kc is a final-year Computer Science student at Kathmandu University, crafting intuitive web tools and researching human-computer interaction in Dhulikhel, Nepal.",
-  email: "ishan.student@ku.edu.np",
+  email,
   location: "Dhulikhel, Nepal",
   university: "Kathmandu University",
   navItems: [
@@ -18,25 +22,25 @@ export const site = {
     { label: "Gallery", href: "#gallery" },
   ] satisfies NavItem[],
   socials: {
-    github: "https://github.com/ishan-ku",
-    linkedin: "https://www.linkedin.com/in/ishan-cs",
-    twitter: "https://twitter.com/ishan_codes",
-    kuPortal: "https://ku.edu.np",
+    github,
+    linkedin,
+    twitter: "https://x.com/ishannkc",
+    instagram: "https://www.instagram.com/ishann.kc/",
   },
   navSocials: [
     {
       label: "Email",
-      href: "mailto:ishan.student@ku.edu.np",
+      href: `mailto:${email}`,
       icon: "mail",
     },
     {
       label: "GitHub",
-      href: "https://github.com/ishan-ku",
+      href: github,
       icon: "github",
     },
     {
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/ishan-cs",
+      href: linkedin,
       icon: "linkedin",
     },
   ] satisfies SocialLink[],
