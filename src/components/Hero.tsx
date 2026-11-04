@@ -1,8 +1,7 @@
 import { hero } from "@/data/profile";
 import { Button } from "./Button";
 import { MailIcon } from "./icons";
-import { WaxSeal } from "./WaxSeal";
-import { MascotIllustration } from "./illustrations/MascotIllustration";
+import { DotPortrait } from "./DotPortrait";
 import {
   Astrolabe,
   CoffeeRing,
@@ -32,58 +31,29 @@ export function Hero() {
               {hero.pitch}
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-space-md lg:justify-start">
+            <div className="flex flex-wrap items-center justify-center gap-space-lg lg:justify-start">
               <Button href={hero.cta.href} size="md">
                 <span>{hero.cta.label}</span>
                 <MailIcon className="h-[1.15em] w-[1.15em]" />
               </Button>
+              <a
+                aria-label={`${hero.resume.label} (PDF)`}
+                className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-lg font-semibold text-[#800020] transition-colors hover:border-[#3B2A20] hover:text-[#3B2A20]"
+                href={hero.resume.href}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span>{hero.resume.label}</span>
+                <span aria-hidden="true" className="text-lg font-bold">
+                  ↗
+                </span>
+              </a>
             </div>
           </div>
 
           <div className="relative flex shrink-0 items-center justify-center">
-            <div className="ink-shadow-md relative rounded-2xl border-2 border-[#3B2A20] bg-[#FAF0DC] p-4">
-              <div
-                aria-hidden="true"
-                className="absolute left-1 top-1 select-none text-xs text-[#B8923A]"
-              >
-                ⌜
-              </div>
-              <div
-                aria-hidden="true"
-                className="absolute right-1 top-1 select-none text-xs text-[#B8923A]"
-              >
-                ⌝
-              </div>
-              <div
-                aria-hidden="true"
-                className="absolute bottom-1 left-1 select-none text-xs text-[#B8923A]"
-              >
-                ⌞
-              </div>
-              <div
-                aria-hidden="true"
-                className="absolute bottom-1 right-1 select-none text-xs text-[#B8923A]"
-              >
-                ⌟
-              </div>
-
-              <div className="relative flex h-64 w-64 items-center justify-center overflow-hidden rounded-xl border-2 border-[#3B2A20] bg-[#EFE1C3] sm:h-72 sm:w-72">
-                <MascotIllustration className="h-full w-full p-2" />
-              </div>
-
-              <WaxSeal
-                className="absolute -right-3 -top-3"
-                shadow
-                size={44}
-              >
-                {hero.mascotBadge}
-              </WaxSeal>
-
-              <div className="ink-shadow-sm absolute -bottom-3 left-3 rounded-md border-2 border-[#3B2A20] bg-[#FAF0DC] px-3.5 py-1 text-[#3B2A20]">
-                <span className="whitespace-nowrap font-label-sm text-xs font-semibold tracking-wide">
-                  {hero.mascotCaption}
-                </span>
-              </div>
+            <div className="w-[300px] sm:w-[320px] lg:w-[340px]">
+              <DotPortrait />
             </div>
           </div>
         </div>

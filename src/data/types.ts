@@ -36,6 +36,10 @@ export interface HeroContent {
     label: string;
     href: string;
   };
+  resume: {
+    label: string;
+    href: string;
+  };
   mascotBadge: string;
   mascotCaption: string;
 }

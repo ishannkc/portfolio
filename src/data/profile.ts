@@ -1,3 +1,4 @@
+import { site } from "./site";
 import type { AboutContent, HeroContent } from "./types";
 
 export const hero: HeroContent = {
@@ -10,7 +11,11 @@ export const hero: HeroContent = {
     "Developer-in-training by day, researcher of how humans poke and talk at phones by night. Fueled by side projects, AI experiments, and the occasional mountain.",
   cta: {
     label: "Say Hi!",
-    href: "#contact",
+    href: `mailto:${site.email}`,
+  },
+  resume: {
+    label: "Resume",
+    href: "/resume.pdf",
   },
   mascotBadge: "★ KU",
   mascotCaption: "Always building! 📜",

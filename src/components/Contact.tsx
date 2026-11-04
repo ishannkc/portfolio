@@ -1,8 +1,5 @@
 import { contact } from "@/data/contact";
-import { site } from "@/data/site";
-import { Button } from "./Button";
 import { Card } from "./Card";
-import { MailIcon } from "./icons";
 import { SectionHeading } from "./SectionHeading";
 import { WaxSeal } from "./WaxSeal";
 import {
@@ -48,50 +45,30 @@ export function Contact() {
           </div>
 
           <div className="max-w-xl sm:pr-24 md:pr-0">
-            <h2 className="font-headline-lg text-3xl font-bold leading-tight text-[#3B2A20] text-balance md:text-4xl">
-              {contact.heading}
-            </h2>
-            <p className="mt-space-sm font-body-lg text-xl leading-relaxed text-[#3B2A20]">
-              {contact.body}
-            </p>
-
-            <div className="mt-space-lg flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button
-                className="w-full sm:w-auto"
-                href={`mailto:${site.email}`}
-                size="md"
-              >
-                <span>Mail me</span>
-                <MailIcon className="h-[1.15em] w-[1.15em]" />
-              </Button>
-            </div>
-
-            <div className="mt-space-lg border-t-2 border-[#3B2A20]/20 pt-space-md">
-              <span className="mb-2 block font-label-sm text-xs font-semibold uppercase tracking-wider text-[#800020]">
-                {contact.socialsHeading}
-              </span>
-              <div className="flex flex-wrap items-center gap-2">
-                {contact.socials.map((social) => (
-                  <a
-                    className="ink-shadow-sm ink-btn-press inline-flex items-center gap-1 rounded-md border-2 border-[#3B2A20] bg-[#EFE1C3] px-3.5 py-1 font-label-md text-xs font-semibold text-[#3B2A20] hover:bg-[#EAD7B0]"
-                    href={social.href}
-                    key={social.label}
-                    rel={
-                      social.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    target={
-                      social.href.startsWith("http") ? "_blank" : undefined
-                    }
-                  >
-                    <span className="whitespace-nowrap">{social.label}</span>
-                    <span aria-hidden="true" className="text-xs">
-                      ↗
-                    </span>
-                  </a>
-                ))}
-              </div>
+            <span className="mb-2 block font-label-sm text-xs font-semibold uppercase tracking-wider text-[#800020]">
+              {contact.socialsHeading}
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              {contact.socials.map((social) => (
+                <a
+                  className="ink-shadow-sm ink-btn-press inline-flex items-center gap-1 rounded-md border-2 border-[#3B2A20] bg-[#EFE1C3] px-3.5 py-1 font-label-md text-xs font-semibold text-[#3B2A20] hover:bg-[#EAD7B0]"
+                  href={social.href}
+                  key={social.label}
+                  rel={
+                    social.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  target={
+                    social.href.startsWith("http") ? "_blank" : undefined
+                  }
+                >
+                  <span className="whitespace-nowrap">{social.label}</span>
+                  <span aria-hidden="true" className="text-xs">
+                    ↗
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
 

@@ -3,8 +3,6 @@ import type { SocialLink } from "./types";
 
 export const contact = {
   label: "/contact",
-  heading: "Let's Make Something Great Together!",
-  body: "Got a project in mind, an HCI research discussion, or just want to chat about frontends over a hot cup of chiya in Dhulikhel?",
   socialsHeading: "Find me around the web:",
   socials: [
     {
