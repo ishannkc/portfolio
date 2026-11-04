@@ -17,7 +17,7 @@ const personJsonLd = {
   "@id": `${siteUrl}/#person`,
   name: site.name,
   url: siteUrl,
-  image: `${siteUrl}/images/temple.png`,
+  image: `${siteUrl}/images/temple-sigil.png`,
   jobTitle: "Computer Science Student & HCI Researcher",
   description: site.description,
   email: `mailto:${site.email}`,

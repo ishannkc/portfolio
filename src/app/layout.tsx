@@ -32,7 +32,7 @@ const newsreader = Newsreader({
 });
 
 const title =
-  "Ishan Kc — Renaissance Scholar & CS Student Portfolio";
+  "Ishan Kc";
 const description =
   "Ishan Kc is a final-year Computer Science student at Kathmandu University, crafting intuitive web tools and researching human-computer interaction in Dhulikhel, Nepal.";
 
@@ -53,6 +53,7 @@ export const metadata: Metadata = {
     "Nepal portfolio",
     "React",
     "Next.js",
+    'ishan-kc'
   ],
   alternates: {
     canonical: "/",
@@ -66,9 +67,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/temple.png",
-        width: 399,
-        height: 501,
+        url: "/images/temple-sigil.png",
+        width: 337,
+        height: 435,
         alt: "Hand-inked Newari pagoda temple sigil used as Ishan Kc's mark",
       },
     ],
@@ -79,15 +80,15 @@ export const metadata: Metadata = {
     description,
     images: [
       {
-        url: "/images/temple.png",
+        url: "/images/temple-sigil.png",
         alt: "Hand-inked Newari pagoda temple sigil used as Ishan Kc's mark",
       },
     ],
   },
   icons: {
-    icon: [{ url: "/images/temple.png", type: "image/png" }],
-    shortcut: "/images/temple.png",
-    apple: "/images/temple.png",
+    icon: [{ url: "/images/temple-sigil.png", type: "image/png" }],
+    shortcut: "/images/temple-sigil.png",
+    apple: "/images/temple-sigil.png",
   },
   robots: {
     index: true,

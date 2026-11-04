@@ -2,7 +2,7 @@ import { site } from "./site";
 import type { SocialLink } from "./types";
 
 export const contact = {
-  label: "Chapter 06: Say Hello! 📮",
+  label: "/contact",
   heading: "Let's Make Something Great Together!",
   body: "Got a project in mind, an HCI research discussion, or just want to chat about frontends over a hot cup of chiya in Dhulikhel?",
   copyLabel: "Copy Email",

@@ -16,17 +16,17 @@ export function Navbar() {
         <div className="flex items-center gap-6 xl:gap-10">
           <a
             aria-label="Ishan Kc — back to top"
-            className="group inline-flex items-center gap-2.5"
+            className="group inline-flex items-center gap-2"
             href="#"
           >
             <Image
               alt=""
               aria-hidden="true"
               className="h-11 w-auto shrink-0 select-none"
-              height={56}
+              height={435}
               priority
-              src="/images/temple.png"
-              width={44}
+              src="/images/temple-sigil.png"
+              width={337}
             />
             <span className="whitespace-nowrap font-headline-lg text-2xl font-extrabold tracking-tight text-[#3B2A20] transition-colors group-hover:text-[#800020] sm:text-3xl">
               Ishan Kc

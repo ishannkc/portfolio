@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/images/temple.png" alt="Temple sigil logo" width="72" />
+  <img src="public/images/temple-sigil.png" alt="Temple sigil logo" width="72" />
 
   <h1>ishan kc - portfolio</h1>
 
