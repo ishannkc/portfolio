@@ -124,6 +124,23 @@
   text-wrap: balance;
 }
 
+/* Staggered entrance for the skill badges. */
+.skill-badge {
+  animation: skill-badge-in 500ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes skill-badge-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Blinking input caret after the hero greeting. */
 .hero-cursor {
   display: inline-block;
@@ -164,6 +181,10 @@
   .hero-cursor {
     animation: none !important;
     opacity: 1 !important;
+  }
+
+  .skill-badge {
+    animation: none !important;
   }
 
   .ink-btn-press:hover,
