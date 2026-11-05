@@ -108,16 +108,6 @@ export function Ornithopter({ className }: { className?: string }) {
         <circle cx="70" cy="75" r="4" />
         <line strokeDasharray="2 2" x1="70" x2="70" y1="75" y2="88" />
         <circle cx="70" cy="88" r="2" />
-        <text
-          fill="#3B2A20"
-          fontFamily="Cormorant Garamond"
-          fontSize="9"
-          fontStyle="italic"
-          x="15"
-          y="82"
-        >
-          fig. 1 volatus
-        </text>
       </svg>
     </div>
   );

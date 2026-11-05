@@ -40,11 +40,7 @@ export function Navbar() {
             {site.navItems.map((item) => (
               <a
                 aria-current={item.href === "#" ? "page" : undefined}
-                className={
-                  item.href === "#"
-                    ? "whitespace-nowrap font-headline-md text-[17px] font-extrabold text-[#800020] underline decoration-[#800020]/60 decoration-1 underline-offset-4 transition-colors xl:text-lg"
-                    : "whitespace-nowrap font-headline-md text-[17px] font-extrabold text-[#3B2A20] transition-colors hover:text-[#800020] hover:underline hover:decoration-[#800020]/60 hover:decoration-1 hover:underline-offset-4 xl:text-lg"
-                }
+                className="whitespace-nowrap font-headline-md text-[17px] font-extrabold text-[#3B2A20] transition-colors hover:text-[#800020] xl:text-lg"
                 href={item.href}
                 key={item.label}
               >

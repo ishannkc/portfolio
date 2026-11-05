@@ -48,11 +48,7 @@ export function MobileNav({ navItems }: MobileNavProps) {
         >
           {navItems.map((item) => (
             <a
-              className={
-                item.href === "#"
-                  ? "font-headline-md text-lg font-extrabold text-[#800020] underline decoration-[#800020]/60 decoration-1 underline-offset-4"
-                  : "font-headline-md text-lg font-extrabold text-[#3B2A20] transition-colors hover:text-[#800020]"
-              }
+              className="font-headline-md text-lg font-extrabold text-[#3B2A20] transition-colors hover:text-[#800020]"
               href={item.href}
               key={item.label}
               onClick={() => setOpen(false)}
