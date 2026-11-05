@@ -84,13 +84,26 @@ export function Research() {
                   </div>
                 ))}
               </div>
+
+              <div className="mt-space-lg">
+                <a
+                  className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-lg font-semibold text-[#800020] transition-colors hover:border-[#3B2A20] hover:text-[#3B2A20]"
+                  download={research.cta.download}
+                  href={research.cta.href}
+                >
+                  <span>{research.cta.label}</span>
+                  <span aria-hidden="true" className="text-lg font-bold">
+                    ↗
+                  </span>
+                </a>
+              </div>
             </div>
 
-            <div className="mx-auto flex w-full max-w-[520px] flex-col items-center gap-space-md lg:mx-0">
-              <div className="ink-shadow w-full overflow-hidden rounded-xl border-2 border-[#3B2A20] bg-white">
+            <div className="mx-auto w-full max-w-[520px] lg:mx-0">
+              <div className="group w-full overflow-hidden rounded-xl border-2 border-[#3B2A20] bg-white shadow-[3px_3px_0px_#3B2A20] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#800020] hover:shadow-[0_24px_50px_-18px_rgba(59,42,32,0.45)] motion-reduce:transform-none">
                 <Image
                   alt={research.paperPreview.alt}
-                  className="h-auto w-full select-none"
+                  className="h-auto w-full select-none transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   height={1743}
                   quality={95}
                   sizes="(max-width: 1024px) 92vw, 520px"
@@ -98,17 +111,6 @@ export function Research() {
                   width={1347}
                 />
               </div>
-
-              <a
-                className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-lg font-semibold text-[#800020] transition-colors hover:border-[#3B2A20] hover:text-[#3B2A20]"
-                download={research.cta.download}
-                href={research.cta.href}
-              >
-                <span>{research.cta.label}</span>
-                <span aria-hidden="true" className="text-lg font-bold">
-                  ↗
-                </span>
-              </a>
             </div>
           </div>
         </Card>
