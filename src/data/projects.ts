@@ -1,5 +1,3 @@
-export type ProjectThumbnail = "sajilo" | "katha" | "chiya" | "spell";
-
 export interface ProjectAction {
   label: string;
   href: string;
@@ -9,67 +7,100 @@ export interface ProjectAction {
 export interface Project {
   title: string;
   description: string;
+  highlights: string[];
   tags: string[];
-  badge: {
-    label: string;
-    tone: "primary" | "gold";
+  image: {
+    src: string;
+    alt: string;
   };
-  thumbnail: ProjectThumbnail;
   actions: ProjectAction[];
 }
 
 export const projects = {
   label: "/projects",
-  title: "Things I Built to Solve Real Problems",
-  subtitle:
-    "From local tools for Nepal to playful frontend component toolkits.",
   items: [
+    {
+      title: "Intervia",
+      description:
+        "An AI interview prep platform with voice-native mock interviews, instant feedback, and progress analytics for on-demand practice.",
+      highlights: [
+        "Enabled real-time voice interviews with Vapi and Gemini via the Vercel AI SDK.",
+        "Secured sessions with HTTP-only cookies and Zod-validated feedback schemas.",
+      ],
+      tags: ["Next.js 15", "TypeScript", "Firebase", "Vapi · Gemini"],
+      image: {
+        src: "/images/intervia.jpeg",
+        alt: "Intervia dashboard with AI interview cards and feedback",
+      },
+      actions: [
+        {
+          label: "GitHub",
+          href: "https://github.com/ishannkc/Intervia",
+          primary: true,
+        },
+      ],
+    },
+    {
+      title: "Shortest Path Visualizer",
+      description:
+        "A visualizer that compares Dijkstra and Bellman-Ford across a weighted university road network, with walking, vehicle, and multi-modal parking routes.",
+      highlights: [
+        "Built a Flask API over a weighted road graph using NetworkX routing utilities.",
+        "Added step-by-step visualizations of visited nodes, explored edges, and final paths.",
+      ],
+      tags: ["Python", "Flask", "NetworkX", "JavaScript"],
+      image: {
+        src: "/images/spv.gif",
+        alt: "Animated shortest path visualization on a university road network",
+      },
+      actions: [
+        {
+          label: "GitHub",
+          href: "https://github.com/ishannkc/Shortest-Path-Visualizer",
+          primary: true,
+        },
+      ],
+    },
     {
       title: "SajiloSite",
       description:
-        "AI-powered website builder tailored for Nepali local creators and small shop owners with effortless localized copy, WhatsApp shop integration, and low-bandwidth asset optimization.",
-      tags: ["React", "Next.js", "OpenAI API", "Tailwind"],
-      badge: { label: "Featured", tone: "primary" },
-      thumbnail: "sajilo",
+        "An AI website builder that turns natural-language prompts into responsive sites and apps, with a live editor and one-click deployment.",
+      highlights: [
+        "Co-led AI integration for a five-person team using DeepSeek via OpenRouter.",
+        "Added Firebase auth, a live Monaco editor with AI chat, and public site URLs.",
+      ],
+      tags: ["React", "Express", "MongoDB", "DeepSeek"],
+      image: {
+        src: "/images/sajilosite.png",
+        alt: "SajiloSite dashboard with generated website previews",
+      },
       actions: [
-        { label: "Live Demo", href: "#", primary: true },
-        { label: "GitHub", href: "#" },
+        {
+          label: "GitHub",
+          href: "https://github.com/anujmagar777/SajiloSite",
+          primary: true,
+        },
       ],
     },
     {
-      title: "KathaUI",
+      title: "Learnify",
       description:
-        "A whimsical, accessible React component library crafted for playful apps and children's digital literacy tools. Fully keyboard navigable, WCAG AAA compliant, and delightfully animated.",
-      tags: ["TypeScript", "React", "Storybook", "Radix UI"],
-      badge: { label: "Design System", tone: "gold" },
-      thumbnail: "katha",
-      actions: [
-        { label: "Components", href: "#", primary: true },
-        { label: "Docs", href: "#" },
+        "An AI-assisted course platform that generates learning content, supports professor approval, and tracks learner progress.",
+      highlights: [
+        "Automated course structure, chapter content, and banner art with Gemini APIs.",
+        "Delivered 10+ REST API routes on a Neon PostgreSQL schema using Drizzle ORM.",
       ],
-    },
-    {
-      title: "ChiyaLog",
-      description:
-        "A cozy personal habit and tea-tracker app built for KU college students to manage semester study routines, monitor caffeine, and schedule group peer reviews.",
-      tags: ["React Native", "Expo", "SQLite", "Node.js"],
-      badge: { label: "Mobile App", tone: "primary" },
-      thumbnail: "chiya",
+      tags: ["Next.js", "Drizzle ORM", "Neon Postgres", "Gemini API"],
+      image: {
+        src: "/images/learnify.png",
+        alt: "Learnify course dashboard with verified courses",
+      },
       actions: [
-        { label: "Expo Build", href: "#", primary: true },
-        { label: "Source", href: "#" },
-      ],
-    },
-    {
-      title: "NepaliSpellCheck",
-      description:
-        "Lightweight browser extension offering fast, context-aware suggestions for Romanized Nepali typing across search bars, email clients, and online campus forums.",
-      tags: ["WebExtensions", "JavaScript", "NLP Heuristics"],
-      badge: { label: "Extension", tone: "gold" },
-      thumbnail: "spell",
-      actions: [
-        { label: "WebStore", href: "#", primary: true },
-        { label: "GitHub", href: "#" },
+        {
+          label: "GitHub",
+          href: "https://github.com/anujmagar777/Learnify",
+          primary: true,
+        },
       ],
     },
   ] satisfies Project[],
