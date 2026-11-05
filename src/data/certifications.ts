@@ -1,62 +1,70 @@
 export interface Certification {
-  symbol: string;
-  year: string;
-  issuer: string;
   title: string;
+  issuer: string;
+  year: string;
   description: string;
-  folio: string;
+  meta: string;
+  image: {
+    src: string;
+    alt: string;
+  };
   href: string;
-  distinction?: string;
-  featured?: boolean;
 }
 
 export const certifications = {
   label: "/ certifications",
-  title: "Scholarly Credentials & Honors",
-  subtitle:
-    "Authenticated certificates in human interaction, modern frontends, and academic excellence.",
   items: [
     {
-      symbol: "★",
-      year: "2024",
-      issuer: "IxDF • Stanford Online • KU HCI Lab",
-      title: "Human-Centered Design Practitioner",
+      title: "The Fullstack Developer Path",
+      issuer: "Scrimba",
+      year: "2026",
       description:
-        "Field usability protocols, contextual inquiry for low-resource interfaces, and human-computer cognitive modeling in Himalayan health nodes.",
-      folio: "Folio: IXDF-KU-78401",
-      href: "#",
+        "Completed Scrimba's 108-hour full-stack path covering modern JavaScript, React, Node.js, APIs, and production-ready web application development.",
+      meta: "108.4 hours · 2,056 lessons",
+      image: {
+        src: "/images/certifications/fullstack-developer-path-text.png",
+        alt: "Scrimba Fullstack Developer Path certificate for Ishan Kc",
+      },
+      href: "/certifications/Full%20Stack%20Developer%20Course%20_%20Scrimba.pdf",
     },
     {
-      symbol: "⚙",
-      year: "2023",
-      issuer: "Meta & Coursera Professional",
-      title: "Full-Stack Web Architect & Modern Frontend",
+      title: "Learn Next.js",
+      issuer: "Scrimba",
+      year: "2026",
       description:
-        "Advanced component lifecycle, React architectural patterns, Node runtime optimization, and high-performance offline client state management.",
-      folio: "Folio: META-FS-99120",
-      href: "#",
+        "Built modern React applications with the Next.js App Router, including server components, routing, data fetching, and deployment workflows.",
+      meta: "8.5 hours · 127 lessons",
+      image: {
+        src: "/images/certifications/learn-nextjs-text.png",
+        alt: "Scrimba Learn Next.js certificate for Ishan Kc",
+      },
+      href: "/certifications/Learn%20Nextjs%20-%20Scrimba.pdf",
     },
     {
-      symbol: "👁",
-      year: "2024",
-      issuer: "W3Cx • IAAP Recognized Track",
-      title: "Accessibility & Inclusive Web Standards (WCAG 2.2)",
+      title: "Learn AI Agents",
+      issuer: "Scrimba",
+      year: "2026",
       description:
-        "Rigorous assistive technology auditing, ARIA authoring landmarks, keyboard navigation trees, and color contrast compliance for low-vision readers.",
-      folio: "Folio: W3C-A11Y-4431",
-      href: "#",
+        "Learned to design and build LLM-powered agents, covering tool use, prompting workflows, and conversational application patterns.",
+      meta: "2 hours · 30 lessons",
+      image: {
+        src: "/images/certifications/learn-ai-agents-text.png",
+        alt: "Scrimba Learn AI Agents certificate for Ishan Kc",
+      },
+      href: "/certifications/Learn%20AI%20Agents%20-%20Scrimba.pdf",
     },
     {
-      symbol: "❦",
-      year: "2024",
-      issuer: "Kathmandu University Dept of CS",
-      title: "Academic Excellence Award (Dean's Honor Roll)",
+      title: "Intro to Supabase",
+      issuer: "Scrimba",
+      year: "2026",
       description:
-        "Conferred for highest academic standing in foundational computer science coursework, peer mentorship leadership, and laboratory HCI research initiatives.",
-      folio: "Folio: KU-SOE-2024-H08",
-      href: "#",
-      distinction: "Distinction",
-      featured: true,
+        "Covered Supabase authentication, Postgres data modeling, row-level security, storage, and realtime application features.",
+      meta: "4.8 hours · 57 lessons",
+      image: {
+        src: "/images/certifications/intro-to-supabase-text.png",
+        alt: "Scrimba Intro to Supabase certificate for Ishan Kc",
+      },
+      href: "/certifications/Intro%20to%20Supabase%20-%20Scrimba.pdf",
     },
   ] satisfies Certification[],
 };

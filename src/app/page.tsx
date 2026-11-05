@@ -5,7 +5,6 @@ import { Projects } from "@/components/Projects";
 import { Research } from "@/components/Research";
 import { Skills } from "@/components/Skills";
 import { Certifications } from "@/components/Certifications";
-import { Gallery } from "@/components/Gallery";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { site } from "@/data/site";
@@ -78,7 +77,7 @@ export default function Home() {
         <Research />
         <Skills />
         <Certifications />
-        <Gallery />
+        {/* Gallery hidden for now; re-enable when the section is ready. */}
         <Contact />
       </main>
       <Footer />

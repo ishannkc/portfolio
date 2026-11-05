@@ -12,7 +12,7 @@ export function Research() {
     >
       <div className="mx-auto max-w-[1100px] px-margin">
         <h2 className="sr-only">Research</h2>
-        <SectionHeading className="mb-space-lg" label={research.label} />
+        <SectionHeading className="mb-space-sm" label={research.label} />
 
         <Card
           className="relative p-space-lg lg:p-space-xl"

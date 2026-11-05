@@ -19,7 +19,6 @@ export const site = {
     { label: "Research", href: "#research" },
     { label: "Skills", href: "#skills" },
     { label: "Certifications", href: "#certifications" },
-    { label: "Gallery", href: "#gallery" },
   ] satisfies NavItem[],
   socials: {
     github,

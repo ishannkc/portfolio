@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { contact } from "@/data/contact";
 import { Card } from "./Card";
 import { SectionHeading } from "./SectionHeading";
-import { WaxSeal } from "./WaxSeal";
 import {
   ContactCoffeeRing,
   WingQuill,
@@ -16,35 +16,25 @@ export function Contact() {
       <ContactCoffeeRing className="pointer-events-none absolute bottom-2 right-4 select-none opacity-25" />
 
       <div className="relative mx-auto max-w-[1100px] px-margin">
-        <SectionHeading className="mb-space-lg" label={contact.label} />
+        <SectionHeading className="mb-space-sm" label={contact.label} />
 
         <Card
           className="relative mx-auto max-w-3xl p-space-lg sm:p-12"
           radius="2xl"
           shadow="md"
         >
-          <div className="ink-shadow-sm absolute right-6 top-6 hidden h-24 w-20 flex-col items-center justify-between rounded border-2 border-dashed border-[#3B2A20] bg-[#EFE1C3] p-1.5 sm:flex">
-            <WaxSeal size={32}>🏔️</WaxSeal>
-            <span className="font-label-sm text-[10px] font-bold uppercase tracking-wider text-[#3B2A20]">
-              {contact.stamp}
-            </span>
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="12"
-              viewBox="0 0 48 12"
-              width="48"
-            >
-              <path
-                d="M0 6 Q 6 0 12 6 T 24 6 T 36 6 T 48 6"
-                fill="none"
-                stroke="#3B2A20"
-                strokeWidth="1.2"
-              />
-            </svg>
+          <div className="pointer-events-none absolute right-4 top-4 hidden w-24 -rotate-2 select-none mix-blend-multiply sm:block md:right-6 md:top-6 lg:w-28">
+            <Image
+              alt="Nepal postage stamp"
+              className="h-auto w-full"
+              height={713}
+              sizes="(max-width: 1024px) 96px, 112px"
+              src="/images/stamp-cropped.webp"
+              width={918}
+            />
           </div>
 
-          <div className="max-w-xl sm:pr-24 md:pr-0">
+          <div className="max-w-xl sm:pr-28 md:pr-28 lg:pr-0">
             <span className="mb-2 block font-label-sm text-xs font-semibold uppercase tracking-wider text-[#800020]">
               {contact.socialsHeading}
             </span>

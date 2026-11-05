@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { certifications } from "@/data/certifications";
 import { Card } from "./Card";
 import { Chip } from "./Chip";
 import { SectionHeading } from "./SectionHeading";
-import { WaxSeal } from "./WaxSeal";
 
 export function Certifications() {
   return (
@@ -11,124 +11,65 @@ export function Certifications() {
       id="certifications"
     >
       <div className="mx-auto max-w-[1100px] px-margin">
-        <SectionHeading
-          className="mb-space-lg"
-          label={certifications.label}
-          subtitle={certifications.subtitle}
-          subtitleClassName="text-base"
-          title={certifications.title}
-        />
+        <SectionHeading className="mb-space-sm" label={certifications.label} />
 
-        <div className="grid grid-cols-1 gap-space-md md:grid-cols-2 lg:grid-cols-3">
-          {certifications.items.map((certificate) => {
-            if (certificate.featured) {
-              return (
-                <Card
-                  className="ink-btn-press relative flex flex-col justify-between p-space-md transition-all md:col-span-2 lg:col-span-3"
-                  key={certificate.title}
-                  radius="xl"
-                  shadow="base"
-                >
-                  <div>
-                    <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                      <div className="flex items-center gap-3">
-                        <WaxSeal size={32}>{certificate.symbol}</WaxSeal>
-                        <div>
-                          <span className="mb-1 block font-label-sm text-[10px] font-bold uppercase tracking-wider text-[#800020]">
-                            {certificate.issuer}
-                          </span>
-                          <h3 className="font-headline-sm text-base font-bold leading-snug text-[#3B2A20]">
-                            {certificate.title}
-                          </h3>
-                        </div>
-                      </div>
+        <div className="grid grid-cols-1 gap-space-md md:grid-cols-2">
+          {certifications.items.map((certificate) => (
+            <Card
+              className="ink-btn-press group flex flex-col p-space-md transition-all"
+              key={certificate.title}
+              radius="xl"
+              shadow="base"
+            >
+              <div>
+                <div className="float-right mb-2 ml-4 w-28 shrink-0 overflow-hidden rounded-lg border-2 border-[#3B2A20] bg-[#EFE1C3] shadow-[2px_2px_0px_#3B2A20] sm:w-36 lg:w-48">
+                  <Image
+                    alt={certificate.image.alt}
+                    className="h-auto w-full select-none transition-transform duration-500 ease-out group-hover:scale-105"
+                    height={620}
+                    quality={95}
+                    sizes="(max-width: 640px) 112px, (max-width: 1024px) 144px, 192px"
+                    src={certificate.image.src}
+                    width={1384}
+                  />
+                </div>
 
-                      <div className="flex items-center gap-2">
-                        {certificate.distinction && (
-                          <Chip
-                            className="ink-shadow-sm"
-                            size="xxs"
-                            tone="primary"
-                          >
-                            {certificate.distinction}
-                          </Chip>
-                        )}
-                        <Chip
-                          className="ink-shadow-sm"
-                          size="xxs"
-                          tone="parchment"
-                        >
-                          {certificate.year}
-                        </Chip>
-                      </div>
-                    </div>
-
-                    <p className="mt-2.5 font-body-sm text-xs leading-relaxed text-[#3B2A20]">
-                      {certificate.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-3 flex items-center justify-between border-t border-[#3B2A20]/20 pt-2.5 font-label-sm text-xs">
-                    <span className="text-[10px] font-medium text-[#584141]">
-                      {certificate.folio}
-                    </span>
-                    <a
-                      className="inline-flex items-center gap-1 font-semibold text-[#800020] underline-offset-4 decoration-[#800020]/60 hover:underline"
-                      href={certificate.href}
-                    >
-                      <span>View Folio</span>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  </div>
-                </Card>
-              );
-            }
-
-            return (
-              <Card
-                className="ink-btn-press relative flex flex-col justify-between p-space-md transition-all"
-                key={certificate.title}
-                radius="xl"
-                shadow="base"
-              >
-                <div>
-                  <div className="mb-3 flex items-center justify-between gap-2">
-                    <WaxSeal size={32}>{certificate.symbol}</WaxSeal>
-                    <Chip
-                      className="ink-shadow-sm"
-                      size="xxs"
-                      tone="parchment"
-                    >
-                      {certificate.year}
-                    </Chip>
-                  </div>
-
-                  <span className="mb-1 block font-label-sm text-[10px] font-bold uppercase tracking-wider text-[#800020]">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-label-sm text-[11px] font-bold uppercase tracking-wider text-[#800020]">
                     {certificate.issuer}
                   </span>
-                  <h3 className="font-headline-sm text-base font-bold leading-snug text-[#3B2A20]">
-                    {certificate.title}
-                  </h3>
-                  <p className="mt-2 font-body-sm text-xs leading-relaxed text-[#3B2A20]">
-                    {certificate.description}
-                  </p>
+                  <Chip size="xxs" tone="parchment">
+                    {certificate.year}
+                  </Chip>
                 </div>
 
-                <div className="mt-4 flex items-center justify-between border-t border-[#3B2A20]/20 pt-2.5 font-label-sm text-xs">
-                  <span className="text-[10px] font-medium text-[#584141]">
-                    {certificate.folio}
-                  </span>
-                  <a
-                    className="inline-flex items-center gap-1 font-semibold text-[#800020] underline-offset-4 decoration-[#800020]/60 hover:underline"
-                    href={certificate.href}
-                  >
-                    <span>View Folio</span>
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
-              </Card>
-            );
-          })}
+                <h3 className="mt-1 font-headline-sm text-2xl font-bold leading-snug text-[#3B2A20]">
+                  {certificate.title}
+                </h3>
+
+                <p className="mt-2 font-body-sm text-lg leading-relaxed text-[#3B2A20]">
+                  {certificate.description}
+                </p>
+
+                <div className="clear-both" />
+              </div>
+
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-[#3B2A20]/20 pt-2.5 font-label-sm text-xs">
+                <span className="text-[11px] font-medium text-[#584141]">
+                  {certificate.meta}
+                </span>
+                <a
+                  className="inline-flex items-center gap-1 font-semibold text-[#800020] underline-offset-4 decoration-[#800020]/60 hover:underline"
+                  href={certificate.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span>View Certificate</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@ export function Skills() {
       id="skills"
     >
       <div className="mx-auto max-w-[1100px] px-margin">
-        <SectionHeading className="mb-space-lg" label={skills.label} />
+        <SectionHeading className="mb-space-sm" label={skills.label} />
 
         <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
           {skills.items.map((skill, index) => (

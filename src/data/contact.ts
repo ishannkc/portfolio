@@ -27,7 +27,6 @@ export const contact = {
     },
   ] satisfies SocialLink[],
   signature: "Sent with warmth from Nepal",
-  stamp: "NEPAL 50R",
 } as const;
 
 export const footer = {

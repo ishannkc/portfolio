@@ -29,7 +29,7 @@ export function Projects() {
       id="projects"
     >
       <div className="mx-auto max-w-[1100px] px-margin">
-        <SectionHeading className="mb-space-lg" label={projects.label} />
+        <SectionHeading className="mb-space-sm" label={projects.label} />
 
         <div className="grid grid-cols-1 gap-space-lg md:grid-cols-2">
           {projects.items.map((project) => (
