@@ -23,23 +23,29 @@ export const hero: HeroContent = {
 
 export const about: AboutContent = {
   label: "/about me",
-  heading: "Student by Day, Tinkerer by Night",
-  dropCap: "I",
-  lead: {
-    before: "'m currently in my third year of Computer Science at ",
-    highlight: "Kathmandu University (KU)",
-    after:
-      ", graduating in 2027. Nestled in the hills of Dhulikhel, I split my time between writing frontends, experimenting with AI workflows, and researching human-computer interaction in our lab.",
-  },
-  body:
-    "When I'm not coding, you'll find me sketching cartoon doodles, brewing spiced milk tea, or fixing broken CSS with friends around the department courtyard.",
-  stats: [
-    { emoji: "📍", label: "Dhulikhel, Nepal" },
-    { emoji: "☕", label: "1,400+ Chais" },
+  intro: [
+    {
+      text: "'m currently in my final year of Computer Science at ",
+    },
+    { text: "Kathmandu University (KU)", bold: true },
+    { text: ", graduating in 2027. Nestled in the hills of " },
+    { text: "Banepa", bold: true },
+    {
+      text: ", I split my time between writing code, experimenting with AI workflows, and learning new tech.",
+    },
   ],
-  desk: {
-    title: "Ishan's Desk in Dhulikhel 🛋️",
-    captionLeft: '🌿 Succulent: "Pixel"',
-    captionRight: "⚡ KU Lab Node: #04",
+  techLabel: "Here are some technologies I have been working with:",
+  technologies: [
+    "Python",
+    "Next.js",
+    "Typescript",
+    "React.js",
+    "Javascript ES6+",
+  ],
+  outro:
+    "In my free time, I’m usually watching movies, gaming for a bit, or glued to the Premier League every weekend.",
+  portrait: {
+    src: "/images/profile2.png",
+    alt: "Ishan Kc standing in front of mountain peaks",
   },
 };

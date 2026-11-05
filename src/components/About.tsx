@@ -1,8 +1,7 @@
+import Image from "next/image";
 import { about } from "@/data/profile";
 import { Card } from "./Card";
 import { SectionHeading } from "./SectionHeading";
-import { WaxSeal } from "./WaxSeal";
-import { DeskScene } from "./illustrations/DeskScene";
 
 export function About() {
   return (
@@ -11,83 +10,71 @@ export function About() {
       id="about"
     >
       <div className="mx-auto max-w-[1100px] px-margin">
-        <SectionHeading className="mb-space-lg" label={about.label} />
+        <SectionHeading className="mb-space-sm" label={about.label} />
 
-        <div className="grid grid-cols-1 items-center gap-space-xl lg:grid-cols-12">
+        <div className="grid grid-cols-1 items-start gap-space-xl lg:grid-cols-12">
           <Card
-            className="relative p-space-lg lg:col-span-7"
+            className="p-space-lg lg:col-span-7"
             radius="2xl"
             shadow="base"
           >
-            <span className="absolute right-3 top-2 font-headline-sm text-xs italic text-[#B8923A]">
-              Folio II
-            </span>
+            <div className="space-y-5">
+              <p className="font-body-lg text-lg leading-relaxed text-[#3B2A20]">
+                <span className="drop-cap-illuminated">I</span>
+                {about.intro.map((segment, index) =>
+                  segment.bold ? (
+                    <strong
+                      className="font-bold text-[#800020]"
+                      key={`${segment.text}-${index}`}
+                    >
+                      {segment.text}
+                    </strong>
+                  ) : (
+                    segment.text
+                  ),
+                )}
+              </p>
 
-            <h2 className="font-headline-lg text-3xl font-bold leading-snug text-[#3B2A20] md:text-4xl">
-              {about.heading}
-            </h2>
+              <div>
+                <p className="font-body-lg text-lg leading-relaxed text-[#3B2A20]">
+                  {about.techLabel}
+                </p>
 
-            <div className="mt-space-md">
-              <span aria-hidden="true" className="drop-cap-illuminated">
-                {about.dropCap}
-              </span>
-              <p className="font-body-lg text-xl leading-relaxed text-[#3B2A20]">
-                {about.lead.before}
-                <strong>{about.lead.highlight}</strong>
-                {about.lead.after}
+                <ul className="mt-2 grid gap-x-10 gap-y-1.5 font-body-md text-lg leading-snug text-[#3B2A20] sm:grid-flow-col sm:grid-rows-3">
+                  {about.technologies.map((technology) => (
+                    <li
+                      className="flex items-center gap-2.5"
+                      key={technology}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="text-sm font-bold leading-none text-[#800020]"
+                      >
+                        ▸
+                      </span>
+                      <span>{technology}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="font-body-lg text-lg leading-relaxed text-[#3B2A20]">
+                {about.outro}
               </p>
             </div>
-
-            <p className="mt-space-sm font-body-md text-lg leading-relaxed text-[#3B2A20]">
-              {about.body}
-            </p>
-
-            <div className="mt-space-lg grid grid-cols-2 gap-space-sm sm:grid-cols-4">
-              {about.stats.map((stat) => (
-                <div
-                  className="ink-shadow-sm rounded-lg border-2 border-[#3B2A20] bg-[#EFE1C3] p-2.5 text-center"
-                  key={stat.label}
-                >
-                  <span aria-hidden="true" className="block text-lg">
-                    {stat.emoji}
-                  </span>
-                  <span className="block whitespace-nowrap font-label-sm text-xs font-semibold text-[#3B2A20]">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
           </Card>
 
-          <Card
-            className="relative p-space-lg lg:col-span-5"
-            radius="2xl"
-            shadow="base"
-          >
-            <WaxSeal
-              className="absolute -top-3.5 left-1/2 -translate-x-1/2"
-              size={28}
-            >
-              ❦
-            </WaxSeal>
-
-            <div className="mb-2 mt-1 text-center">
-              <span className="font-headline-sm text-base font-bold text-[#3B2A20]">
-                {about.desk.title}
-              </span>
+          <div className="group relative lg:col-span-5">
+            <div className="relative aspect-[10/9] overflow-hidden rounded-[2rem] transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-[0_24px_50px_-18px_rgba(59,42,32,0.45)] motion-reduce:transform-none">
+              <Image
+                alt={about.portrait.alt}
+                className="select-none object-cover object-bottom"
+                fill
+                sizes="(max-width: 1024px) 90vw, 420px"
+                src={about.portrait.src}
+              />
             </div>
-
-            <div className="rounded-xl border-2 border-[#3B2A20] bg-[#EFE1C3] p-4">
-              <DeskScene className="h-auto w-full" />
-            </div>
-
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 font-label-sm text-xs text-[#3B2A20]">
-              <span className="whitespace-nowrap">{about.desk.captionLeft}</span>
-              <span className="whitespace-nowrap">
-                {about.desk.captionRight}
-              </span>
-            </div>
-          </Card>
+          </div>
         </div>
       </div>
     </section>

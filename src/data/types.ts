@@ -20,9 +20,9 @@ export interface SocialLink {
   handle?: string;
 }
 
-export interface Stat {
-  emoji: string;
-  label: string;
+export interface TextSegment {
+  text: string;
+  bold?: boolean;
 }
 
 export interface HeroContent {
@@ -46,18 +46,12 @@ export interface HeroContent {
 
 export interface AboutContent {
   label: string;
-  heading: string;
-  dropCap: string;
-  lead: {
-    before: string;
-    highlight: string;
-    after: string;
-  };
-  body: string;
-  stats: Stat[];
-  desk: {
-    title: string;
-    captionLeft: string;
-    captionRight: string;
+  intro: TextSegment[];
+  techLabel: string;
+  technologies: string[];
+  outro: string;
+  portrait: {
+    src: string;
+    alt: string;
   };
 }
