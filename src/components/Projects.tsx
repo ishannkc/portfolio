@@ -64,7 +64,7 @@ export function Projects() {
       <div className="mx-auto max-w-[900px] px-margin">
         <div className="relative mb-space-sm">
           <SectionHeading label={projects.label} />
-          <div className="mt-2 flex justify-center sm:absolute sm:right-0 sm:top-0 sm:mt-0">
+          <div className="mt-2 flex justify-center sm:absolute sm:right-0 sm:top-8 sm:mt-0">
             <a
               className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-sm font-semibold text-[#800020] transition-all duration-200 hover:-translate-y-1 hover:border-[#3B2A20] hover:text-[#3B2A20] motion-reduce:transform-none sm:text-base"
               href={site.socials.github}

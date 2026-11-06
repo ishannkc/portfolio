@@ -70,6 +70,9 @@ const DEFAULTS: Omit<DotImageOptions, "onError"> = {
   pad: 0.04,
 };
 
+/** Furthest a dot may stray from its home position, in CSS pixels. */
+const MAX_DISPLACEMENT = 80;
+
 /**
  * Renders an image as a grid of interactive dots on a canvas.
  * Framework-agnostic: instantiate with a canvas element and destroy on unmount.
@@ -344,12 +347,26 @@ export default class DotImage {
           p.vx += (dx / d) * f;
           p.vy += (dy / d) * f;
         }
+
+        // The spring runs every frame for every dot, independent of the
+        // pointer and with no canvas-boundary handling.
         p.vx += (p.hx - p.x) * o.spring;
         p.vy += (p.hy - p.y) * o.spring;
         p.vx *= o.friction;
         p.vy *= o.friction;
         p.x += p.vx;
         p.y += p.vy;
+
+        // Keep each dot within reach of its home so it can never be pushed
+        // against the canvas edge and clipped into a pile.
+        const offX = p.x - p.hx;
+        const offY = p.y - p.hy;
+        const off = Math.hypot(offX, offY);
+        if (off > MAX_DISPLACEMENT) {
+          const ratio = MAX_DISPLACEMENT / off;
+          p.x = p.hx + offX * ratio;
+          p.y = p.hy + offY * ratio;
+        }
       }
 
       const speed = assembling ? 0 : Math.min(Math.hypot(p.vx, p.vy) / 4, 1);
