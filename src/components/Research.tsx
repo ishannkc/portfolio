@@ -87,7 +87,7 @@ export function Research() {
 
               <div className="mt-space-lg">
                 <a
-                  className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-lg font-semibold text-[#800020] transition-colors hover:border-[#3B2A20] hover:text-[#3B2A20]"
+                  className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-lg font-semibold text-[#800020] transition-all duration-200 hover:-translate-y-1 hover:border-[#3B2A20] hover:text-[#3B2A20] motion-reduce:transform-none"
                   download={research.cta.download}
                   href={research.cta.href}
                 >

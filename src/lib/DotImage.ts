@@ -27,6 +27,18 @@ interface Dot {
   /** Home position on the canvas, in CSS pixels. */
   hx: number;
   hy: number;
+  /** Random start position for the assemble animation. */
+  sx: number;
+  sy: number;
+  /** Assemble delay in seconds. */
+  delay: number;
+  /** Assemble duration and easing power (randomised per dot). */
+  duration: number;
+  ease: number;
+  /** Sideways arc offset in pixels for a non-linear path. */
+  curve: number;
+  /** Random phase for the idle twinkle effect. */
+  twinkle: number;
   /** Current position. */
   x: number;
   y: number;
@@ -34,6 +46,8 @@ interface Dot {
   vy: number;
   /** Normalised brightness (0..1). */
   lum: number;
+  /** Settled opacity (before speed highlights). */
+  alpha: number;
 }
 
 interface BBox {
@@ -76,6 +90,8 @@ export default class DotImage {
   private w = 0;
   private h = 0;
   private gap = 0;
+  private start = 0;
+  private assembled = false;
   private ro: ResizeObserver;
   private io: IntersectionObserver;
 
@@ -211,17 +227,75 @@ export default class DotImage {
         if (data[i + 3] < 40) continue; // transparent -> no dot
         const lum =
           (0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]) / 255;
-        raw.push({ hx: x, hy: y, x, y, vx: 0, vy: 0, lum });
+        raw.push({
+          hx: x,
+          hy: y,
+          sx: x,
+          sy: y,
+          delay: 0,
+          duration: 0.6,
+          ease: 3,
+          curve: 0,
+          twinkle: 0,
+          x,
+          y,
+          vx: 0,
+          vy: 0,
+          lum,
+          alpha: 0.3,
+        });
       }
     }
+    if (!raw.length) return;
 
     // Normalise brightness so dark clothes/hair still show up.
     const sorted = raw.map((p) => p.lum).sort((a, b) => a - b);
     const lo = sorted[Math.floor(sorted.length * 0.05)] ?? 0;
     const hi = sorted[Math.floor(sorted.length * 0.95)] ?? 1;
+
+    // First build starts the assemble animation; later rebuilds (resize)
+    // reuse the current settled layout so the effect does not replay.
+    const firstBuild = !this.assembled;
+    this.assembled = true;
+    if (firstBuild) this.start = performance.now();
+
+    let minX = Infinity;
+    let minY = Infinity;
+    let maxX = -Infinity;
+    let maxY = -Infinity;
+    for (const p of raw) {
+      if (p.hx < minX) minX = p.hx;
+      if (p.hy < minY) minY = p.hy;
+      if (p.hx > maxX) maxX = p.hx;
+      if (p.hy > maxY) maxY = p.hy;
+    }
+    const spanX = Math.max(1, maxX - minX);
+    const spanY = Math.max(1, maxY - minY);
+
     for (const p of raw) {
       const n = Math.min(1, Math.max(0, (p.lum - lo) / Math.max(0.0001, hi - lo)));
       p.lum = Math.pow(n, 0.7);
+      p.alpha = 0.3 + p.lum * 0.55;
+      p.twinkle = Math.random() * Math.PI * 2;
+      if (firstBuild && !this.reduced) {
+        p.sx = minX + Math.random() * spanX;
+        p.sy = minY + Math.random() * spanY;
+        p.delay = Math.random() * 0.2;
+        p.duration = 0.4 + Math.random() * 0.4;
+        p.ease = 2 + Math.random() * 2;
+        const dist = Math.hypot(p.hx - p.sx, p.hy - p.sy) || 1;
+        p.curve = (Math.random() - 0.5) * Math.min(20, dist * 0.5);
+        p.x = p.sx;
+        p.y = p.sy;
+      } else {
+        // Settled state: skip the assemble animation.
+        p.sx = p.hx;
+        p.sy = p.hy;
+        p.delay = 0;
+        p.duration = 0.6;
+        p.ease = 3;
+        p.curve = 0;
+      }
     }
     this.p = raw;
     if (this.reduced) this.draw(0); // static render for reduced-motion users
@@ -241,31 +315,53 @@ export default class DotImage {
     const { ctx, o, mouse } = this;
     const radius = o.radius * this.w;
     const k = this.gap / 5;
-    const wave = this.reduced ? 0 : o.wave;
     const [R, G, B] = o.rgb;
+    const elapsed = this.reduced ? Number.POSITIVE_INFINITY : (t - this.start) / 1000;
     ctx.clearRect(0, 0, this.w, this.h);
 
     for (const p of this.p) {
-      const ty =
-        p.hy + Math.sin(p.hx * 0.03 + t * 0.0015 + p.hy * 0.02) * wave;
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const d = Math.hypot(dx, dy);
-      if (d < radius && d > 0.01) {
-        const f = Math.pow(1 - d / radius, 2) * o.push;
-        p.vx += (dx / d) * f;
-        p.vy += (dy / d) * f;
-      }
-      p.vx += (p.hx - p.x) * o.spring;
-      p.vy += (ty - p.y) * o.spring;
-      p.vx *= o.friction;
-      p.vy *= o.friction;
-      p.x += p.vx;
-      p.y += p.vy;
+      // Assemble: ease from a random start to the dot's home position.
+      const progress = Math.min(
+        1,
+        Math.max(0, (elapsed - p.delay) / p.duration),
+      );
+      const eased = 1 - Math.pow(1 - progress, p.ease);
+      const assembling = eased < 1;
 
-      const speed = Math.min(Math.hypot(p.vx, p.vy) / 4, 1);
-      const size = (0.6 + p.lum * 1.4 + speed * 1.2) * k;
-      ctx.fillStyle = `rgba(${R},${G},${B},${0.3 + p.lum * 0.55 + speed * 0.3})`;
+      if (assembling) {
+        const dx = p.hx - p.sx;
+        const dy = p.hy - p.sy;
+        const len = Math.hypot(dx, dy) || 1;
+        const bend = Math.sin(progress * Math.PI) * p.curve;
+        p.x = p.sx + dx * eased + (-dy / len) * bend;
+        p.y = p.sy + dy * eased + (dx / len) * bend;
+      } else {
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const d = Math.hypot(dx, dy);
+        if (d < radius && d > 0.01) {
+          const f = Math.pow(1 - d / radius, 2) * o.push;
+          p.vx += (dx / d) * f;
+          p.vy += (dy / d) * f;
+        }
+        p.vx += (p.hx - p.x) * o.spring;
+        p.vy += (p.hy - p.y) * o.spring;
+        p.vx *= o.friction;
+        p.vy *= o.friction;
+        p.x += p.vx;
+        p.y += p.vy;
+      }
+
+      const speed = assembling ? 0 : Math.min(Math.hypot(p.vx, p.vy) / 4, 1);
+      const twinkle = this.reduced ? 0 : Math.sin(t * 0.0007 + p.twinkle);
+      const twinkleAmount = 0.2 * eased;
+      const size =
+        (0.6 + p.lum * 1.4 + speed * 1.2 + twinkle * twinkleAmount * 0.5) * k;
+      const alpha =
+        (p.alpha + speed * 0.3) *
+        (0.3 + 0.7 * eased) *
+        (1 + twinkle * twinkleAmount);
+      ctx.fillStyle = `rgba(${R},${G},${B},${alpha})`;
       if (size > 1.6 * k) {
         // plus-shaped bright dots
         ctx.fillRect(p.x - size, p.y - 0.4, size * 2, 0.8);
