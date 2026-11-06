@@ -15,7 +15,7 @@ export const hero: HeroContent = {
   },
   resume: {
     label: "Resume",
-    href: "/resume.pdf",
+    href: "/resume/ishankc_resume.pdf",
   },
   mascotBadge: "★ KU",
   mascotCaption: "Always building! 📜",

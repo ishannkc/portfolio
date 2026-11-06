@@ -56,7 +56,7 @@ export function HeroHeading({ before, highlight, after }: HeroHeadingProps) {
   return (
     <h1
       aria-label={`${before}${highlight}${after}`}
-      className="mb-space-md min-h-[1.15em] font-display-hero text-6xl font-bold leading-none tracking-tight text-[#3B2A20] md:text-7xl"
+      className="mb-space-md min-h-[1.15em] font-display-hero text-[3.4rem] font-bold leading-none tracking-tight text-[#3B2A20] md:text-[4.1rem]"
     >
       <span>{before}</span>
       <span className="font-extrabold text-[#800020]" ref={highlightRef} />

@@ -1,126 +1,231 @@
+"use client";
+
 import Image from "next/image";
+import { useRef, useState } from "react";
+import type { KeyboardEvent, TouchEvent } from "react";
 import type { Project } from "@/data/projects";
 import { projects } from "@/data/projects";
-import { Button } from "./Button";
-import { Card } from "./Card";
-import { Chip } from "./Chip";
+import { site } from "@/data/site";
+import { cn } from "@/lib/cn";
 import { GitHubIcon } from "./icons";
 import { SectionHeading } from "./SectionHeading";
 
-function ProjectArt({ project }: { project: Project }) {
-  return (
-    <div className="relative mb-space-md aspect-[16/9] w-full overflow-hidden rounded-xl border-2 border-[#3B2A20] bg-[#EFE1C3]">
-      <Image
-        alt={project.image.alt}
-        className="object-cover object-top"
-        fill
-        quality={95}
-        sizes="(max-width: 768px) 92vw, 512px"
-        src={project.image.src}
-        unoptimized={project.image.src.endsWith(".gif")}
-      />
-    </div>
-  );
+function githubFor(project: Project) {
+  return project.actions.find((action) => action.label === "GitHub");
 }
 
 export function Projects() {
+  const [active, setActive] = useState(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const lastSwipeAt = useRef(0);
+  const count = projects.items.length;
+
+  const goTo = (index: number) =>
+    setActive(((index % count) + count) % count);
+  const next = () => setActive((index) => (index + 1) % count);
+  const prev = () => setActive((index) => (index - 1 + count) % count);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      next();
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      prev();
+    }
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+
+    // Only treat deliberate horizontal swipes as navigation.
+    if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy)) return;
+    lastSwipeAt.current = Date.now();
+    if (dx < 0) next();
+    else prev();
+  };
+
   return (
     <section
-      className="w-full border-b-2 border-[#3B2A20] bg-[#F5EAD4] py-space-xl"
+      className="w-full border-b-2 border-[#3B2A20] bg-[#F5EAD4] py-space-lg"
       id="projects"
     >
-      <div className="mx-auto max-w-[1100px] px-margin">
-        <SectionHeading className="mb-space-sm" label={projects.label} />
+      <div className="mx-auto max-w-[900px] px-margin">
+        <div className="relative mb-space-sm">
+          <SectionHeading label={projects.label} />
+          <div className="mt-2 flex justify-center sm:absolute sm:right-0 sm:top-0 sm:mt-0">
+            <a
+              className="group inline-flex items-center gap-1.5 border-b-2 border-[#800020] pb-0.5 font-headline-md text-sm font-semibold text-[#800020] transition-all duration-200 hover:-translate-y-1 hover:border-[#3B2A20] hover:text-[#3B2A20] motion-reduce:transform-none sm:text-base"
+              href={site.socials.github}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span>View all Projects</span>
+              <span aria-hidden="true" className="font-bold">
+                →
+              </span>
+            </a>
+          </div>
+        </div>
 
-        <div className="grid grid-cols-1 gap-space-lg md:grid-cols-2">
-          {projects.items.map((project) => {
-            const github = project.actions.find(
-              (action) => action.label === "GitHub",
-            );
+        <div
+          aria-label="Project carousel. Use the left and right arrow keys to navigate."
+          aria-roledescription="carousel"
+          className="group relative"
+          role="region"
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+        >
+          <div
+            className="ink-shadow-md relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border-2 border-[#3B2A20] bg-primary-container transition-transform duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transform-none sm:aspect-[16/10]"
+            onTouchEnd={handleTouchEnd}
+            onTouchStart={handleTouchStart}
+          >
+            {projects.items.map((project, index) => {
+              const isActive = index === active;
+              const github = githubFor(project);
 
-            return (
-              <Card
-                className="ink-btn-press relative flex flex-col p-space-md transition-all"
-                key={project.title}
-                radius="2xl"
-                shadow="base"
-              >
-                {github && (
-                  <a
-                    aria-label={`Open ${project.title} on GitHub`}
-                    className="absolute inset-0 z-10 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#800020]"
-                    href={github.href}
-                    rel="noopener noreferrer"
-                    target="_blank"
+              return (
+                <article
+                  aria-hidden={!isActive}
+                  aria-label={`${index + 1} of ${count}: ${project.title}`}
+                  aria-roledescription="slide"
+                  className={cn(
+                    "absolute inset-0 flex items-end justify-center transition-opacity duration-[400ms] ease-out motion-reduce:transition-none",
+                    isActive ? "opacity-100" : "pointer-events-none opacity-0",
+                  )}
+                  inert={!isActive}
+                  key={project.title}
+                >
+                  <Image
+                    alt={project.image.alt}
+                    className="object-cover object-top brightness-[0.7]"
+                    fill
+                    quality={95}
+                    sizes="(max-width: 640px) 92vw, 900px"
+                    src={project.image.src}
+                    unoptimized={project.image.src.endsWith(".gif")}
                   />
-                )}
 
-                <ProjectArt project={project} />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, transparent 0%, transparent 30%, rgba(40, 0, 10, 0.85) 65%, rgba(40, 0, 10, 0.95) 100%)",
+                    }}
+                  />
 
-              <h3 className="font-headline-sm text-2xl font-bold text-[#3B2A20]">
-                {project.title}
-              </h3>
-              <p className="mt-1 font-body-md text-base leading-relaxed text-[#3B2A20]">
-                {project.description}
-              </p>
+                  {github && (
+                    <a
+                      aria-label={`Open ${project.title} on GitHub`}
+                      className="absolute inset-0 z-20 rounded-[24px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
+                      href={github.href}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      onClick={(event) => {
+                        // A horizontal swipe should navigate the carousel,
+                        // not open the link it happened to end on.
+                        if (Date.now() - lastSwipeAt.current < 400) {
+                          event.preventDefault();
+                        }
+                      }}
+                    />
+                  )}
 
-              <ul className="mt-3 space-y-1.5">
-                {project.highlights.map((highlight) => (
-                  <li
-                    className="flex gap-2 font-body-md text-sm leading-snug text-[#3B2A20]"
-                    key={highlight}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mt-0.5 text-sm font-black leading-none text-[#800020]"
-                    >
-                      ▸
-                    </span>
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
+                  <div className="relative flex max-h-full w-full flex-col items-center overflow-y-auto overscroll-contain px-5 pb-2 pt-10 text-center sm:px-10">
+                    <h3 className="font-headline-lg text-3xl font-bold leading-tight text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.7)] sm:text-4xl md:text-5xl">
+                      {project.title}
+                    </h3>
 
-              <div className="mb-space-md mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pt-space-md">
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <Chip key={tag} tone="parchment">
-                      {tag}
-                    </Chip>
-                  ))}
-                </div>
+                    <p className="mt-1 max-w-[60ch] font-body-md text-base font-medium leading-[1.3] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.7)] sm:mt-1.5">
+                      {project.description}
+                    </p>
 
-                <div className="relative z-20 flex items-center gap-space-sm">
-                  {project.actions.map((action) =>
-                    action.label === "GitHub" ? (
+                    <ul className="mx-auto mt-2 max-w-[65ch] space-y-1 text-left sm:mt-2.5">
+                      {project.highlights.map((highlight) => (
+                        <li
+                          className="flex gap-2 font-body-md text-base font-medium leading-[1.3] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.7)]"
+                          key={highlight}
+                        >
+                          <span
+                            aria-hidden="true"
+                            className="mt-[0.35em] text-xs font-black leading-none text-[#E8C77A]"
+                          >
+                            ▸
+                          </span>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <p className="mt-2 whitespace-nowrap font-label-md text-[11px] font-bold tracking-wide text-secondary-container [text-shadow:0_2px_8px_rgba(0,0,0,0.7)] sm:mt-2.5 sm:text-sm">
+                      {project.tags.join(" · ")}
+                    </p>
+
+                    {github && (
                       <a
-                        aria-label={`${project.title} on GitHub`}
-                        className="ink-btn-press inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border-2 border-[#3B2A20] bg-[#800020] text-[#FFF4E0] transition-colors hover:bg-[#6b001b]"
-                        href={action.href}
-                        key={action.label}
+                        aria-label={`Open ${project.title} on GitHub`}
+                        className="ink-btn-press relative z-30 mt-2 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#3B2A20] bg-primary text-white transition-colors hover:bg-[#6b001b] sm:mt-3"
+                        href={github.href}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
                         <GitHubIcon className="h-5 w-5" />
                       </a>
-                    ) : (
-                      <Button
-                        external={action.href.startsWith("http")}
-                        href={action.href}
-                        key={action.label}
-                        size="xs"
-                        variant={action.primary ? "primary" : "secondary"}
-                      >
-                        <span>{action.label}</span>
-                        <span aria-hidden="true">↗</span>
-                      </Button>
-                    ),
-                  )}
-                </div>
-              </div>
-            </Card>
-            );
-          })}
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <button
+            aria-label="Previous project"
+            className="absolute left-2 top-1/2 z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#3B2A20] bg-[#FAF0DC] text-xl font-bold text-[#3B2A20] shadow-[2px_2px_0px_#3B2A20] transition-colors hover:bg-[#EFE1C3] sm:-left-5 sm:h-11 sm:w-11"
+            type="button"
+            onClick={prev}
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <button
+            aria-label="Next project"
+            className="absolute right-2 top-1/2 z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#3B2A20] bg-[#FAF0DC] text-xl font-bold text-[#3B2A20] shadow-[2px_2px_0px_#3B2A20] transition-colors hover:bg-[#EFE1C3] sm:-right-5 sm:h-11 sm:w-11"
+            type="button"
+            onClick={next}
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div className="mt-space-md flex items-center justify-center gap-2">
+          {projects.items.map((project, index) => (
+            <button
+              aria-current={index === active ? "true" : undefined}
+              aria-label={`Go to ${project.title}`}
+              className={cn(
+                "h-2.5 rounded-full border-2 border-[#3B2A20] transition-all duration-300 motion-reduce:transition-none",
+                index === active
+                  ? "w-8 bg-primary"
+                  : "w-2.5 bg-[#FAF0DC] hover:bg-[#EFE1C3]",
+              )}
+              key={project.title}
+              type="button"
+              onClick={() => goTo(index)}
+            />
+          ))}
         </div>
       </div>
     </section>

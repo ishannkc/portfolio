@@ -5,6 +5,7 @@ import {
   Newsreader,
 } from "next/font/google";
 import "./globals.css";
+import { ScrollToTopOnReload } from "@/components/ScrollToTopOnReload";
 import { siteUrl } from "@/lib/site-url";
 
 const cormorant = Cormorant_Garamond({
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${cormorant.variable} ${ebGaramond.variable} ${newsreader.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-[#F5EAD4] font-body-md text-[#3B2A20] antialiased">
+        <ScrollToTopOnReload />
         {children}
       </body>
     </html>
