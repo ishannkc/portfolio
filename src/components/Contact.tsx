@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { contact } from "@/data/contact";
 import { Card } from "./Card";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 import {
   ContactCoffeeRing,
@@ -18,11 +19,12 @@ export function Contact() {
       <div className="relative mx-auto max-w-[1100px] px-margin">
         <SectionHeading className="mb-space-sm" label={contact.label} />
 
-        <Card
-          className="relative mx-auto max-w-3xl p-space-lg sm:p-12"
-          radius="2xl"
-          shadow="md"
-        >
+        <Reveal>
+          <Card
+            className="relative mx-auto max-w-3xl p-space-lg sm:p-12"
+            radius="2xl"
+            shadow="md"
+          >
           <div className="pointer-events-none absolute right-4 top-4 hidden w-24 -rotate-2 select-none mix-blend-multiply sm:block md:right-6 md:top-6 lg:w-28">
             <Image
               alt="Nepal postage stamp"
@@ -69,6 +71,7 @@ export function Contact() {
             <WingQuill />
           </div>
         </Card>
+        </Reveal>
       </div>
     </section>
   );

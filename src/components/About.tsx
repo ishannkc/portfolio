@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { about } from "@/data/profile";
 import { Card } from "./Card";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+
+const TECH_STAGGER_MS = 40;
+const TECH_STAGGER_CAP_MS = 600;
 
 export function About() {
   return (
@@ -41,18 +45,24 @@ export function About() {
                 </p>
 
                 <ul className="mt-2 grid gap-x-10 gap-y-1.5 font-body-md text-lg leading-snug text-[#3B2A20] sm:grid-flow-col sm:grid-rows-3">
-                  {about.technologies.map((technology) => (
-                    <li
-                      className="flex items-center gap-2.5"
-                      key={technology}
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="text-sm font-bold leading-none text-[#800020]"
+                  {about.technologies.map((technology, index) => (
+                    <li key={technology}>
+                      <Reveal
+                        className="flex items-center gap-2.5"
+                        delay={Math.min(
+                          index * TECH_STAGGER_MS,
+                          TECH_STAGGER_CAP_MS,
+                        )}
+                        distance={12}
                       >
-                        ▸
-                      </span>
-                      <span>{technology}</span>
+                        <span
+                          aria-hidden="true"
+                          className="text-sm font-bold leading-none text-[#800020]"
+                        >
+                          ▸
+                        </span>
+                        <span>{technology}</span>
+                      </Reveal>
                     </li>
                   ))}
                 </ul>

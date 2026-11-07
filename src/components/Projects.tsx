@@ -8,6 +8,7 @@ import { projects } from "@/data/projects";
 import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
 import { GitHubIcon } from "./icons";
+import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
 
 function githubFor(project: Project) {
@@ -87,11 +88,12 @@ export function Projects() {
           tabIndex={0}
           onKeyDown={handleKeyDown}
         >
-          <div
-            className="ink-shadow-md relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border-2 border-[#3B2A20] bg-primary-container transition-transform duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transform-none sm:aspect-[16/10]"
-            onTouchEnd={handleTouchEnd}
-            onTouchStart={handleTouchStart}
-          >
+          <Reveal>
+            <div
+              className="ink-shadow-md relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border-2 border-[#3B2A20] bg-primary-container transition-transform duration-200 ease-out group-hover:-translate-y-1 motion-reduce:transform-none sm:aspect-[16/10]"
+              onTouchEnd={handleTouchEnd}
+              onTouchStart={handleTouchStart}
+            >
             {projects.items.map((project, index) => {
               const isActive = index === active;
               const github = githubFor(project);
@@ -189,7 +191,8 @@ export function Projects() {
                 </article>
               );
             })}
-          </div>
+            </div>
+          </Reveal>
 
           <button
             aria-label="Previous project"
