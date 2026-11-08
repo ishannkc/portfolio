@@ -1,12 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import {
   Cormorant_Garamond,
   EB_Garamond,
   Newsreader,
 } from "next/font/google";
 import "./globals.css";
+import { HashRouteGuard } from "@/components/HashRouteGuard";
 import { ScrollToTopOnReload } from "@/components/ScrollToTopOnReload";
 import { site } from "@/data/site";
+import { KNOWN_HASHES } from "@/lib/hash-routes";
 import { siteUrl } from "@/lib/site-url";
 
 const cormorant = Cormorant_Garamond({
@@ -102,6 +105,22 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/**
+ * Runs before hydration so an unknown fragment such as `/#projects/hi` is
+ * rewritten to `/projects/hi` immediately, letting Next render the Not Found
+ * page without flashing the home page first.
+ */
+const hashRouteScript = `
+(function () {
+  var known = ${JSON.stringify(KNOWN_HASHES)};
+  var hash = window.location.hash;
+  if (window.location.pathname !== "/" || !hash || hash === "#") return;
+  if (known.indexOf(hash) === -1) {
+    window.location.replace("/" + hash.slice(1));
+  }
+})();
+`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -109,7 +128,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${cormorant.variable} ${ebGaramond.variable} ${newsreader.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-[#F5EAD4] font-body-md text-[#3B2A20] antialiased">
+        <Script id="hash-route-guard" strategy="beforeInteractive">
+          {hashRouteScript}
+        </Script>
         <ScrollToTopOnReload />
+        <HashRouteGuard />
         {children}
       </body>
     </html>
