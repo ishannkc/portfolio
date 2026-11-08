@@ -9,6 +9,7 @@ const SKILL_STAGGER_CAP_MS = 600;
 export function Skills() {
   return (
     <section
+      aria-label="Skills"
       className="w-full border-b-2 border-[#3B2A20] bg-[#F5EAD4] py-space-xl"
       id="skills"
     >

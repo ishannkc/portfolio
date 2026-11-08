@@ -8,11 +8,11 @@ import { SectionHeading } from "./SectionHeading";
 export function Research() {
   return (
     <section
+      aria-label="Research"
       className="w-full border-b-2 border-[#3B2A20] bg-[#EFE1C3] py-space-xl"
       id="research"
     >
       <div className="mx-auto max-w-[1100px] px-margin">
-        <h2 className="sr-only">Research</h2>
         <SectionHeading className="mb-space-sm" label={research.label} />
 
         <Reveal>

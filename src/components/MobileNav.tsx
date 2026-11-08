@@ -52,7 +52,9 @@ export function MobileNav({ navItems }: MobileNavProps) {
               href={item.href}
               key={item.label}
               onClick={() => setOpen(false)}
-              {...(item.href === "#" ? { "aria-current": "page" as const } : {})}
+              {...(item.href === "#home"
+                ? { "aria-current": "page" as const }
+                : {})}
             >
               {item.label}
             </a>

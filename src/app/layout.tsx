@@ -6,12 +6,13 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ScrollToTopOnReload } from "@/components/ScrollToTopOnReload";
+import { site } from "@/data/site";
 import { siteUrl } from "@/lib/site-url";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   display: "swap",
   variable: "--font-cormorant",
 });
@@ -32,14 +33,15 @@ const newsreader = Newsreader({
   variable: "--font-newsreader",
 });
 
-const title =
-  "Ishan Kc";
-const description =
-  "Ishan Kc is a final-year Computer Science student at Kathmandu University, crafting intuitive web tools and researching human-computer interaction in Dhulikhel, Nepal.";
+const title = site.title;
+const description = site.description;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title,
+  title: {
+    default: title,
+    template: `%s | ${site.name}`,
+  },
   description,
   applicationName: "Ishan Kc — Portfolio",
   authors: [{ name: "Ishan Kc", url: siteUrl }],
@@ -66,30 +68,25 @@ export const metadata: Metadata = {
     title,
     description,
     locale: "en_US",
-    images: [
-      {
-        url: "/images/temple-sigil.png",
-        width: 337,
-        height: 435,
-        alt: "Hand-inked Newari pagoda temple sigil used as Ishan Kc's mark",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: [
-      {
-        url: "/images/temple-sigil.png",
-        alt: "Hand-inked Newari pagoda temple sigil used as Ishan Kc's mark",
-      },
-    ],
   },
   icons: {
-    icon: [{ url: "/images/temple-sigil.png", type: "image/png" }],
-    shortcut: "/images/temple-sigil.png",
-    apple: "/images/temple-sigil.png",
+    icon: [
+      { url: "/images/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/images/icon-192.png",
+    apple: [
+      {
+        url: "/images/apple-icon-180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
   robots: {
     index: true,

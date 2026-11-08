@@ -11,6 +11,7 @@ import {
 export function Contact() {
   return (
     <section
+      aria-label="Contact"
       className="relative w-full overflow-hidden bg-[#F5EAD4] py-space-xl"
       id="contact"
     >

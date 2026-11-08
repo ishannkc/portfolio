@@ -10,6 +10,7 @@ const TECH_STAGGER_CAP_MS = 600;
 export function About() {
   return (
     <section
+      aria-label="About me"
       className="w-full border-b-2 border-[#3B2A20] bg-[#EFE1C3] py-space-xl"
       id="about"
     >

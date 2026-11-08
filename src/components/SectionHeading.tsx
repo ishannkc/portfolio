@@ -42,7 +42,7 @@ export function SectionHeading({
         className,
       )}
     >
-      <div
+      <h2
         className={cn(
           "ink-shadow-sm inline-flex max-w-full items-center gap-2 rounded-full border-2 border-[#3B2A20] bg-[#FAF0DC] px-space-md py-1.5",
           divider === "after-copy" && "mb-space-sm",
@@ -57,12 +57,12 @@ export function SectionHeading({
         <span aria-hidden="true" className="text-sm text-[#800020]">
           ✦
         </span>
-      </div>
+      </h2>
 
       {divider === "after-chip" && <FlourishDivider />}
 
       {title && (
-        <h2
+        <h3
           className={cn(
             "font-headline-lg text-3xl font-bold leading-tight text-[#3B2A20] text-balance md:text-4xl",
             divider === "after-chip" && "mt-3",
@@ -70,7 +70,7 @@ export function SectionHeading({
           )}
         >
           {title}
-        </h2>
+        </h3>
       )}
 
       {subtitle && (

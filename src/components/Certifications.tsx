@@ -11,6 +11,7 @@ const CERTIFICATION_STAGGER_CAP_MS = 600;
 export function Certifications() {
   return (
     <section
+      aria-label="Certifications"
       className="w-full border-b-2 border-[#3B2A20] bg-[#EFE1C3] py-space-xl"
       id="certifications"
     >
@@ -70,6 +71,7 @@ export function Certifications() {
                     {certificate.meta}
                   </span>
                   <a
+                    aria-label={`View ${certificate.title} certificate (PDF, opens in a new tab)`}
                     className="inline-flex items-center gap-1 font-semibold text-[#800020] underline-offset-4 decoration-[#800020]/60 hover:underline"
                     href={certificate.href}
                     rel="noopener noreferrer"

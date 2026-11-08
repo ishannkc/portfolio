@@ -6,14 +6,14 @@ const linkedin = "https://www.linkedin.com/in/ishan-kc-bb3380285/";
 
 export const site = {
   name: "Ishan Kc",
-  title: "Ishan Kc — Renaissance Scholar & CS Student Portfolio",
+  title: "Ishan Kc",
   description:
     "Ishan Kc is a final-year Computer Science student at Kathmandu University, crafting intuitive web tools and researching human-computer interaction in Dhulikhel, Nepal.",
   email,
-  location: "Dhulikhel, Nepal",
+  location: "Banepa, Nepal",
   university: "Kathmandu University",
   navItems: [
-    { label: "Home", href: "#" },
+    { label: "Home", href: "#home" },
     { label: "About", href: "#about" },
     { label: "Projects", href: "#projects" },
     { label: "Research", href: "#research" },

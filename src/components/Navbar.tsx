@@ -4,9 +4,9 @@ import { GitHubIcon, LinkedInIcon, MailIcon } from "./icons";
 import { MobileNav } from "./MobileNav";
 
 function SocialIcon({ icon }: { icon: "mail" | "github" | "linkedin" }) {
-  if (icon === "mail") return <MailIcon className="h-6 w-6 sm:h-7 sm:w-7" />;
-  if (icon === "github") return <GitHubIcon className="h-6 w-6 sm:h-7 sm:w-7" />;
-  return <LinkedInIcon className="h-6 w-6 sm:h-7 sm:w-7" />;
+  if (icon === "mail") return <MailIcon className="h-5 w-5 sm:h-7 sm:w-7" />;
+  if (icon === "github") return <GitHubIcon className="h-5 w-5 sm:h-7 sm:w-7" />;
+  return <LinkedInIcon className="h-5 w-5 sm:h-7 sm:w-7" />;
 }
 
 export function Navbar() {
@@ -17,7 +17,7 @@ export function Navbar() {
           <a
             aria-label="Ishan Kc — back to top"
             className="group inline-flex items-center gap-2"
-            href="#"
+            href="#home"
           >
             <Image
               alt=""
@@ -28,7 +28,7 @@ export function Navbar() {
               src="/images/temple-sigil.png"
               width={337}
             />
-            <span className="whitespace-nowrap font-headline-lg text-2xl font-extrabold tracking-tight text-[#3B2A20] transition-colors group-hover:text-[#800020] sm:text-3xl">
+            <span className="whitespace-nowrap font-headline-lg text-xl font-extrabold tracking-tight text-[#3B2A20] transition-colors group-hover:text-[#800020] sm:text-3xl">
               Ishan Kc
             </span>
           </a>
@@ -39,7 +39,7 @@ export function Navbar() {
           >
             {site.navItems.map((item) => (
               <a
-                aria-current={item.href === "#" ? "page" : undefined}
+                aria-current={item.href === "#home" ? "page" : undefined}
                 className="whitespace-nowrap font-headline-md text-[17px] font-extrabold text-[#3B2A20] transition-colors hover:text-[#800020] xl:text-lg"
                 href={item.href}
                 key={item.label}
@@ -50,8 +50,8 @@ export function Navbar() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-3 sm:gap-5">
-          <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-5">
+          <div className="flex items-center gap-2 sm:gap-4">
             {site.navSocials.map((social) => (
               <a
                 aria-label={social.label}

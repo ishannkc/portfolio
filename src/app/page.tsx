@@ -28,6 +28,10 @@ const personJsonLd = {
       name: "Department of Computer Science & Engineering",
     },
   },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: site.university,
+  },
   address: {
     "@type": "PostalAddress",
     addressLocality: "Dhulikhel",
