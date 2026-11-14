@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
   Cormorant_Garamond,
   EB_Garamond,
@@ -52,11 +54,15 @@ export const metadata: Metadata = {
   publisher: "Ishan Kc",
   keywords: [
     "Ishan Kc",
+    'ishankc website',
+    'ishankc np',
     "Kathmandu University",
     "Computer Science student",
     "HCI researcher",
     "frontend developer",
     "Nepal portfolio",
+    'ai engineer',
+    'forward deployed engineer',
     "React",
     "Next.js",
     'ishan-kc'
@@ -134,6 +140,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ScrollToTopOnReload />
         <HashRouteGuard />
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
