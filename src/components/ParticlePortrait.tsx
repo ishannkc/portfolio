@@ -1,24 +1,4 @@
-"use client";
-
-import dynamic from "next/dynamic";
-
-/**
- * The canvas effect is browser-only and heavy, so load it after hydration.
- * The placeholder reserves the same aspect ratio to avoid layout shift.
- */
-const DotPortrait = dynamic(
-  () =>
-    import("./DotPortrait").then((module) => ({ default: module.DotPortrait })),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        aria-hidden="true"
-        className="aspect-[1379/1678] w-full"
-      />
-    ),
-  },
-);
+import { DotPortrait } from "./DotPortrait";
 
 interface ParticlePortraitProps {
   className?: string;
@@ -26,6 +6,11 @@ interface ParticlePortraitProps {
   alt?: string;
 }
 
+/**
+ * The portrait is part of the page bundle now (instead of a client-only dynamic
+ * import) so its canvas hydrates with the rest of the hero. The preloaded
+ * poster inside DotPortrait keeps the first paint instant either way.
+ */
 export function ParticlePortrait(props: ParticlePortraitProps) {
   return <DotPortrait {...props} />;
 }

@@ -79,8 +79,11 @@ export function About() {
             <div className="relative aspect-[10/9] overflow-hidden rounded-[2rem] transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-[0_24px_50px_-18px_rgba(59,42,32,0.45)] motion-reduce:transform-none">
               <Image
                 alt={about.portrait.alt}
+                blurDataURL={about.portrait.blur}
                 className="select-none object-cover object-[50%_55%]"
                 fill
+                placeholder="blur"
+                priority
                 sizes="(max-width: 1024px) 90vw, 420px"
                 src={about.portrait.src}
               />

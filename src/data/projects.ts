@@ -1,3 +1,5 @@
+import { blurData } from "./blur";
+
 export interface ProjectAction {
   label: string;
   href: string;
@@ -12,6 +14,11 @@ export interface Project {
   image: {
     src: string;
     alt: string;
+    blur: string;
+  };
+  /** When present, the slide plays a looping video instead of the still. */
+  video?: {
+    src: string;
   };
   actions: ProjectAction[];
 }
@@ -29,8 +36,9 @@ export const projects = {
       ],
       tags: ["Next.js 15", "TypeScript", "Firebase", "Vapi · Gemini"],
       image: {
-        src: "/images/intervia.jpeg",
+        src: "/images/projects/intervia.webp",
         alt: "Intervia dashboard with AI interview cards and feedback",
+        blur: blurData.projectIntervia,
       },
       actions: [
         {
@@ -50,8 +58,12 @@ export const projects = {
       ],
       tags: ["Python", "Flask", "NetworkX", "JavaScript"],
       image: {
-        src: "/images/spv.gif",
+        src: "/images/projects/spv-poster.webp",
         alt: "Animated shortest path visualization on a university road network",
+        blur: blurData.projectSpv,
+      },
+      video: {
+        src: "/images/projects/spv.mp4",
       },
       actions: [
         {
@@ -71,8 +83,9 @@ export const projects = {
       ],
       tags: ["React", "Express", "MongoDB", "DeepSeek"],
       image: {
-        src: "/images/sajilosite.png",
+        src: "/images/projects/sajilosite.webp",
         alt: "SajiloSite dashboard with generated website previews",
+        blur: blurData.projectSajilo,
       },
       actions: [
         {
@@ -92,8 +105,9 @@ export const projects = {
       ],
       tags: ["Next.js", "Drizzle ORM", "Neon Postgres", "Gemini API"],
       image: {
-        src: "/images/learnify.png",
+        src: "/images/projects/learnify.webp",
         alt: "Learnify course dashboard with verified courses",
+        blur: blurData.projectLearnify,
       },
       actions: [
         {

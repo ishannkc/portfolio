@@ -1,3 +1,5 @@
+import { blurData } from "./blur";
+
 export const research = {
   label: "/research",
   publicationTag: "Ongoing",
@@ -35,7 +37,8 @@ export const research = {
     download: "HCI RP.pdf",
   },
   paperPreview: {
-    src: "/images/research-paper.png",
+    src: "/images/research-paper.webp",
     alt: "First page of the HCI research paper",
+    blur: blurData.researchPaper,
   },
 } as const;

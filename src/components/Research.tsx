@@ -108,9 +108,10 @@ export function Research() {
                 <div className="group w-full overflow-hidden rounded-xl border-2 border-[#3B2A20] bg-white shadow-[3px_3px_0px_#3B2A20] transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-[#800020] hover:shadow-[0_24px_50px_-18px_rgba(59,42,32,0.45)] motion-reduce:transform-none">
                   <Image
                     alt={research.paperPreview.alt}
+                    blurDataURL={research.paperPreview.blur}
                     className="h-auto w-full select-none transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     height={1743}
-                    quality={95}
+                    placeholder="blur"
                     sizes="(max-width: 1024px) 92vw, 520px"
                     src={research.paperPreview.src}
                     width={1347}

@@ -23,10 +23,10 @@ export function Navbar() {
               alt=""
               aria-hidden="true"
               className="h-11 w-auto shrink-0 select-none"
-              height={435}
+              height={114}
               priority
-              src="/images/temple-sigil.png"
-              width={337}
+              src="/images/temple-sigil-icon.webp"
+              width={88}
             />
             <span className="whitespace-nowrap font-headline-lg text-xl font-extrabold tracking-tight text-[#3B2A20] transition-colors group-hover:text-[#800020] sm:text-3xl">
               Ishan Kc

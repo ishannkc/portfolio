@@ -1,5 +1,6 @@
 import { site } from "./site";
 import type { AboutContent, HeroContent } from "./types";
+import { blurData } from "./blur";
 
 export const hero: HeroContent = {
   heading: {
@@ -45,7 +46,8 @@ export const about: AboutContent = {
   outro:
     "In my free time, I’m usually watching movies, gaming for a bit, or glued to the Premier League every weekend.",
   portrait: {
-    src: "/images/profile2.png",
+    src: "/images/about-portrait.webp",
     alt: "Ishan Kc standing in front of mountain peaks",
+    blur: blurData.aboutPortrait,
   },
 };

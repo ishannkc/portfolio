@@ -53,5 +53,6 @@ export interface AboutContent {
   portrait: {
     src: string;
     alt: string;
+    blur: string;
   };
 }

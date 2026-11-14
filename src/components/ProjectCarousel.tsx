@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent, TouchEvent } from "react";
 import type { Project } from "@/data/projects";
 import { cn } from "@/lib/cn";
 import { GitHubIcon } from "./icons";
 import { Reveal } from "./Reveal";
+
+const LEAVE_MS = 420;
 
 function githubFor(project: Project) {
   return project.actions.find((action) => action.label === "GitHub");
@@ -18,14 +20,74 @@ interface ProjectCarouselProps {
 
 export function ProjectCarousel({ items }: ProjectCarouselProps) {
   const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
+  const [leaving, setLeaving] = useState<number | null>(null);
+  const [reduceMotion, setReduceMotion] = useState(false);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const lastSwipeAt = useRef(0);
+  const leaveTimer = useRef<number | null>(null);
   const count = items.length;
 
-  const goTo = (index: number) =>
-    setActive(((index % count) + count) % count);
-  const next = () => setActive((index) => (index + 1) % count);
-  const prev = () => setActive((index) => (index - 1 + count) % count);
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduceMotion(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  // Warm the neighbouring stills once the browser is idle, so a swipe or dot
+  // click does not land on an empty slide.
+  useEffect(() => {
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    if (connection?.saveData) return;
+    if (connection?.effectiveType && /(^|-)2g$/.test(connection.effectiveType)) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      const neighbours = new Set([
+        (active + 1) % count,
+        (active - 1 + count) % count,
+      ]);
+      neighbours.forEach((index) => {
+        const item = items[index];
+        if (!item) return;
+        const image = new window.Image();
+        image.src = item.image.src;
+      });
+    }, 900);
+
+    return () => window.clearTimeout(timer);
+  }, [active, count, items]);
+
+  useEffect(() => {
+    return () => {
+      if (leaveTimer.current) window.clearTimeout(leaveTimer.current);
+    };
+  }, []);
+
+  const goTo = (index: number) => {
+    const current = activeRef.current;
+    const nextIndex = ((index % count) + count) % count;
+    if (nextIndex === current) return;
+
+    activeRef.current = nextIndex;
+    setLeaving(current);
+    setActive(nextIndex);
+
+    if (leaveTimer.current) window.clearTimeout(leaveTimer.current);
+    leaveTimer.current = window.setTimeout(() => {
+      setLeaving(null);
+      leaveTimer.current = null;
+    }, LEAVE_MS);
+  };
+  const next = () => goTo(activeRef.current + 1);
+  const prev = () => goTo(activeRef.current - 1);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "ArrowRight") {
@@ -93,6 +155,9 @@ export function ProjectCarousel({ items }: ProjectCarouselProps) {
           {items.map((project, index) => {
             const isActive = index === active;
             const github = githubFor(project);
+            // Keep the outgoing slide's media mounted for the fade-out; every
+            // other slide stays lightweight until it is selected.
+            const showMedia = isActive || index === leaving;
 
             return (
               <article
@@ -106,15 +171,31 @@ export function ProjectCarousel({ items }: ProjectCarouselProps) {
                 inert={!isActive}
                 key={project.title}
               >
-                <Image
-                  alt={project.image.alt}
-                  className="object-cover object-top brightness-[0.7]"
-                  fill
-                  quality={95}
-                  sizes="(max-width: 640px) 92vw, 900px"
-                  src={project.image.src}
-                  unoptimized={project.image.src.endsWith(".gif")}
-                />
+                {showMedia &&
+                  (project.video && !reduceMotion ? (
+                    <video
+                      aria-label={project.image.alt}
+                      autoPlay
+                      className="absolute inset-0 h-full w-full object-cover object-top brightness-[0.7]"
+                      loop
+                      muted
+                      playsInline
+                      poster={project.image.src}
+                      preload="metadata"
+                      role="img"
+                      src={project.video.src}
+                    />
+                  ) : (
+                    <Image
+                      alt={project.image.alt}
+                      blurDataURL={project.image.blur}
+                      className="object-cover object-top brightness-[0.7]"
+                      fill
+                      placeholder="blur"
+                      sizes="(max-width: 640px) 92vw, 900px"
+                      src={project.image.src}
+                    />
+                  ))}
 
                 <div
                   aria-hidden="true"

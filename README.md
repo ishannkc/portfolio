@@ -66,6 +66,22 @@
    On Vercel, `VERCEL_PROJECT_PRODUCTION_URL` and `VERCEL_URL` are used as
    fallbacks when `NEXT_PUBLIC_SITE_URL` is not set.
 
+## 🖼️ image assets
+
+Display-sized WebP files and the looping project preview are generated ahead
+of time and served directly (no runtime image optimizer). Edit an original in
+`assets/source/images`, then regenerate with:
+
+```bash
+npm run images
+```
+
+The script writes the optimised files to `public/images` and refreshes the
+blur placeholders in `src/data/blur.ts`. It needs [sharp](https://sharp.pixelplumbing.com/)
+and, for the MP4 preview, `ffmpeg` on the PATH. Keep generated filenames stable
+(treat them as immutable) or rename the file when its contents change; the
+`/images/*` cache headers are set to one year.
+
 ## 🎨 color codes
 
 | Color | Hex |

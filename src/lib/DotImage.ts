@@ -21,6 +21,8 @@ export interface DotImageOptions {
   pad: number;
   /** Called if the source image cannot be loaded. */
   onError?: () => void;
+  /** Called once, after the first frame has been drawn to the canvas. */
+  onReady?: () => void;
 }
 
 interface BBox {
@@ -30,7 +32,7 @@ interface BBox {
   h: number;
 }
 
-const DEFAULTS: Omit<DotImageOptions, "onError"> = {
+const DEFAULTS: Omit<DotImageOptions, "onError" | "onReady"> = {
   gapDivisor: 110,
   minGap: 4,
   radius: 0.16,
@@ -100,6 +102,7 @@ export default class DotImage {
   private assembled = false;
   private staticMode = false;
   private degraded = false;
+  private readyFired = false;
 
   private visible = true;
   private raf = 0;
@@ -772,6 +775,11 @@ export default class DotImage {
 
     // Fine pointers keep the idle twinkle (unchanged desktop behaviour);
     // coarse pointers sleep as soon as everything is at rest.
+    if (!this.readyFired) {
+      this.readyFired = true;
+      this.o.onReady?.();
+    }
+
     if (this.coarse) return assembling || moving || burstOn;
     return true;
   }

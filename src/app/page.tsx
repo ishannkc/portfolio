@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { ImagePrefetch } from "@/components/ImagePrefetch";
 import { About } from "@/components/About";
 import { Projects } from "@/components/Projects";
 import { Research } from "@/components/Research";
@@ -57,6 +58,18 @@ const personJsonLd = {
 export default function Home() {
   return (
     <>
+      <link
+        as="image"
+        fetchPriority="high"
+        href="/images/profile-particle.webp"
+        rel="preload"
+      />
+      <link
+        as="image"
+        fetchPriority="high"
+        href="/images/about-portrait.webp"
+        rel="preload"
+      />
       <script
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
@@ -85,6 +98,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <ImagePrefetch />
     </>
   );
 }

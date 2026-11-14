@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { contact } from "@/data/contact";
+import { blurData } from "@/data/blur";
 import { Card } from "./Card";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
@@ -29,10 +30,12 @@ export function Contact() {
           <div className="pointer-events-none absolute right-4 top-4 hidden w-24 -rotate-2 select-none mix-blend-multiply sm:block md:right-6 md:top-6 lg:w-28">
             <Image
               alt="Nepal postage stamp"
+              blurDataURL={blurData.stamp}
               className="h-auto w-full"
               height={713}
+              placeholder="blur"
               sizes="(max-width: 1024px) 96px, 112px"
-              src="/images/stamp-cropped.webp"
+              src="/images/stamp-cropped-224.webp"
               width={918}
             />
           </div>

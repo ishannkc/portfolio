@@ -37,9 +37,10 @@ export function Certifications() {
                   <div className="float-right mb-2 ml-4 w-28 shrink-0 overflow-hidden rounded-lg border-2 border-[#3B2A20] bg-[#EFE1C3] shadow-[2px_2px_0px_#3B2A20] sm:w-36 lg:w-48">
                     <Image
                       alt={certificate.image.alt}
+                      blurDataURL={certificate.image.blur}
                       className="h-auto w-full select-none transition-transform duration-500 ease-out group-hover:scale-105"
                       height={620}
-                      quality={95}
+                      placeholder="blur"
                       sizes="(max-width: 640px) 112px, (max-width: 1024px) 144px, 192px"
                       src={certificate.image.src}
                       width={1384}

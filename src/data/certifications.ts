@@ -1,3 +1,5 @@
+import { blurData } from "./blur";
+
 export interface Certification {
   title: string;
   issuer: string;
@@ -7,6 +9,7 @@ export interface Certification {
   image: {
     src: string;
     alt: string;
+    blur: string;
   };
   href: string;
 }
@@ -22,8 +25,9 @@ export const certifications = {
         "Completed Scrimba's 108-hour full-stack path covering modern JavaScript, React, Node.js, APIs, and production-ready web application development.",
       meta: "108.4 hours · 2,056 lessons",
       image: {
-        src: "/images/certifications/fullstack-developer-path-text.png",
+        src: "/images/certifications/fullstack-developer-path-text.webp",
         alt: "Scrimba Fullstack Developer Path certificate for Ishan Kc",
+        blur: blurData.certFullstack,
       },
       href: "/certifications/Full%20Stack%20Developer%20Course%20_%20Scrimba.pdf",
     },
@@ -35,8 +39,9 @@ export const certifications = {
         "Built modern React applications with the Next.js App Router, including server components, routing, data fetching, and deployment workflows.",
       meta: "8.5 hours · 127 lessons",
       image: {
-        src: "/images/certifications/learn-nextjs-text.png",
+        src: "/images/certifications/learn-nextjs-text.webp",
         alt: "Scrimba Learn Next.js certificate for Ishan Kc",
+        blur: blurData.certNextjs,
       },
       href: "/certifications/Learn%20Nextjs%20-%20Scrimba.pdf",
     },
@@ -48,8 +53,9 @@ export const certifications = {
         "Learned to design and build LLM-powered agents, covering tool use, prompting workflows, and conversational application patterns.",
       meta: "2 hours · 30 lessons",
       image: {
-        src: "/images/certifications/learn-ai-agents-text.png",
+        src: "/images/certifications/learn-ai-agents-text.webp",
         alt: "Scrimba Learn AI Agents certificate for Ishan Kc",
+        blur: blurData.certAiAgents,
       },
       href: "/certifications/Learn%20AI%20Agents%20-%20Scrimba.pdf",
     },
@@ -61,8 +67,9 @@ export const certifications = {
         "Covered Supabase authentication, Postgres data modeling, row-level security, storage, and realtime application features.",
       meta: "4.8 hours · 57 lessons",
       image: {
-        src: "/images/certifications/intro-to-supabase-text.png",
+        src: "/images/certifications/intro-to-supabase-text.webp",
         alt: "Scrimba Intro to Supabase certificate for Ishan Kc",
+        blur: blurData.certSupabase,
       },
       href: "/certifications/Intro%20to%20Supabase%20-%20Scrimba.pdf",
     },
